@@ -1,0 +1,30 @@
+﻿@model Grand.Plugin.Widgets.AjaxFilters.Models.ProductsModel
+@using Grand.Web.Extensions
+@if (Model.Products.Count() > 0)
+{
+    if (Model.ViewMode == "list")
+    {
+        <div class="product-list row">
+            <div class="col-12">
+                @foreach (var product in Model.Products)
+                {
+                    @await Html.PartialAsync("~/Views/Shared/_ProductBoxList.cshtml", product, new ViewDataDictionary(this.ViewData))
+                }
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="product-grid subCategoryList">
+            <div class="row flex-grid">
+                @foreach (var product in Model.Products)
+                {
+                    <div class="col-lg-4 col-sm-6 col-6 product-container">
+                        @await Html.PartialAsync("~/Views/Shared/_ProductBox.cshtml", product, new ViewDataDictionary(this.ViewData))
+                    </div>
+                }
+            </div>
+        </div>
+    }
+    @Html.Pager(Model.PagingFilteringContext).QueryParam("pagenumber")
+}

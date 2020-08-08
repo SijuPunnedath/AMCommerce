@@ -1,0 +1,128 @@
+﻿@model Grand.Plugin.Widgets.SwiperSlider.Models.ConfigurationModel
+@using Grand.Framework.UI;
+@using Grand.Framework;
+@using Grand.Core.Infrastructure;
+@{
+    Layout = "_ConfigurePlugin";
+    ViewBag.Title = T("grand.widget.swiperslider.slides").Text;
+
+}
+
+
+<script>
+    $(document).ready(function() {
+        $("#@Html.IdFor(model => model.breakpoints)").click(toggleBreakpoints);
+        toggleBreakpoints();
+
+        $("#@Html.IdFor(model => model.showPagination)").click(togglePagination);
+        togglePagination();
+
+        $("#@Html.IdFor(model => model.usecountdown)").click(togglecountdown);
+        togglecountdown();
+    });
+
+
+
+    function toggleBreakpoints() {
+        if ($('#@Html.IdFor(model => model.breakpoints)').is(':checked')) {
+            $('.breakpoints-settings').show();
+        } else {
+            $('.breakpoints-settings').hide();
+        }
+    }
+
+    function togglePagination() {
+        if ($('#@Html.IdFor(model => model.showPagination)').is(':checked')) {
+            $('.showPagination').show();
+        } else {
+            $('.showPagination').hide();
+        }
+    }
+
+    function togglecountdown() {
+        if ($('#@Html.IdFor(model => model.usecountdown)').is(':checked')) {
+            $('.usecountdown').show();
+        } else {
+            $('.usecountdown').hide();
+        }
+    }
+
+</script>
+
+
+@await Component.InvokeAsync("StoreScopeConfiguration")
+<form asp-controller="WidgetsSwiperSlider" asp-action="Configure" method="post">
+    <antiforgery-token />
+
+    <div class="text-right">
+        <button type="submit" name="save" class="btn green">
+            <i class="fa fa-floppy-o"></i>
+            @T("Admin.Common.Save")
+        </button>
+    </div>
+
+    <div class="panel-group">
+        <div class="from-horizontal">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    @T("grand.widget.swiperslider.configuration")
+                    @if (Grand.Plugin.Widgets.SwiperSlider.GrandPlugin.TrialVersion)
+                    {
+                        <text>
+                            TRIAL VERSION. To buy full verison go to the <a href="https://grandnode.com/other-plugins" target="blank">store</a>.
+                        </text>
+                    }
+                </div>
+                <div class="panel-body">
+                    <div id="plugin-configure">
+                        <ul>
+                            <li tab-index="0" class="k-state-active">
+                                @T("grand.Widget.SwiperSlider.Options")
+                            </li>
+                            <li tab-index="1">
+                                @T("grand.Widget.SwiperSlider.SlidesList")
+                            </li>
+                            <li tab-index="2">
+                                @T("grand.Widget.SwiperSlider.breakpoints")
+                            </li>
+                            <li tab-index="3">
+                                @T("grand.Widget.SwiperSlider.widgetzonetab")
+                            </li>
+                        </ul>
+
+                        <div>
+                            <partial name="Configure.TabInfo.cshtml" model="Model" />
+                        </div>
+                        <div>
+                            <partial name="Configure.TabSlides.cshtml" model="Model" />
+                        </div>
+                        <div>
+                            <partial name="Configure.TabBreakpoints.cshtml" model="Model" />
+                        </div>
+                        <div>
+                            <partial name="Configure.TabWidgets.cshtml" model="Model" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @*save selected tab index*@
+    <input type="hidden" id="selected-tab-index" name="selected-tab-index" value="@(GetSelectedTabIndex())">
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#plugin-configure").kendoTabStrip({
+                animation: {
+                    open: {
+                        effects: "fadeIn"
+                    }
+                },
+                select: tabstrip_on_tab_select
+            });
+        });
+    </script>
+
+</form>

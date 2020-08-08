@@ -1,0 +1,220 @@
+﻿@model FooterModel
+@await Component.InvokeAsync("NewsletterBox")
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-12 py-3">
+                <div id="footer-block-about-us" class="d-flex flex-column">
+                    <div id="logo-footer">
+                        <a href="#">
+                            <img src="" />
+                        </a>
+                    </div>
+                    <div class="call-us f-block">
+                        <div class="icon">
+                            <span class="lni lni lni-headphone-alt"></span>
+                        </div>
+                        <div class="info">
+                            <div class="info-head">@T("Footer.Phone.Title")</div>
+                            <div class="info-bottom">@Model.CompanyPhone</div>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-column">
+                        <h6>@T("Footer.AboutUs")</h6>
+                        <ul>
+                            <li>@Model.CompanyEmail</li>
+                            <li>@Model.CompanyAddress</li>
+                            <li>@Model.CompanyHours</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-12">
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-12">
+                        <div id="footer-block-information" class="f-block">
+                            <h6>@T("Footer.Information")</h6>
+                            <ul>
+                                @if (Model.SitemapEnabled)
+                                {
+                                    <li><a href="@Url.RouteUrl("Sitemap")">@T("Sitemap")</a></li>
+                                }
+                                @foreach (var topic in Model.Topics.Where(x => x.IncludeInFooterRow1).ToList())
+                                {
+                                    <li><a href="@Url.RouteUrl("Topic", new { SeName = topic.SeName })">@topic.Name</a></li>
+                                }
+                                <li><a href="@Url.RouteUrl("ContactUs")">@T("ContactUs")</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-12">
+                        <div class="f-block">
+                            <h6>Useful Links</h6>
+                            <ul>
+                                <li><a href="@Url.RouteUrl("ProductSearch")">@T("Search")</a> </li>
+                                @if (Model.NewsEnabled)
+                                {
+                                    <li><a href="@Url.RouteUrl("NewsArchive")">@T("News")</a></li>
+                                }
+                                @if (Model.BlogEnabled)
+                                {
+                                    <li><a href="@Url.RouteUrl("Blog")">@T("Blog")</a></li>
+                                }
+                                @if (Model.ForumEnabled)
+                                {
+                                    <li><a href="@Url.RouteUrl("Boards")">@T("Forum.Forums")</a></li>
+                                }
+                                @if (Model.KnowledgebaseEnabled)
+                                {
+                                    <li><a href="@Url.RouteUrl("Knowledgebase")">@T("Knowledgebase")</a></li>
+                                }
+                                @if (Model.RecentlyViewedProductsEnabled)
+                                {
+                                    <li><a href="@Url.RouteUrl("RecentlyViewedProducts")">@T("Products.RecentlyViewedProducts")</a></li>
+                                }
+                                @if (Model.CompareProductsEnabled)
+                                {
+                                    <li><a href="@Url.RouteUrl("CompareProducts")">@T("Products.Compare.List")</a></li>
+                                }
+                                @if (Model.NewProductsEnabled)
+                                {
+                                    <li><a href="@Url.RouteUrl("NewProducts")">@T("Products.NewProducts")</a></li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-12">
+                        <div id="footer-block-my-account" class="f-block">
+                            <h6>@T("Footer.MyAccount")</h6>
+                            <ul>
+                                <li><a href="@Url.RouteUrl("CustomerInfo")">@T("Account.MyAccount")</a></li>
+                                <li><a href="@Url.RouteUrl("CustomerOrders")">@T("Account.CustomerOrders")</a></li>
+                                <li><a href="@Url.RouteUrl("CustomerAddresses")">@T("Account.CustomerAddresses")</a></li>
+                                @if (Model.ShoppingCartEnabled)
+                                {
+                                    <li><a href="@Url.RouteUrl("ShoppingCart")">@T("ShoppingCart")</a></li>
+                                }
+                                @if (Model.WishlistEnabled)
+                                {
+                                    <li><a href="@Url.RouteUrl("Wishlist")">@T("Wishlist")</a></li>
+                                }
+                                @if (Model.AllowCustomersToApplyForVendorAccount)
+                                {
+                                    <li><a href="@Url.RouteUrl("ApplyVendorAccount")">@T("Vendors.ApplyAccount")</a></li>
+                                }
+                                @foreach (var topic in Model.Topics.Where(x => x.IncludeInFooterRow2).ToList())
+                                {
+                                    <li><a href="@Url.RouteUrl("Topic", new { SeName = topic.SeName })" target="_blank">@topic.Name</a></li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-12 social-icons f-block">
+                        <ul class="d-flex flex-row justify-content-center w-100 flex-wrap">
+                            @if (!string.IsNullOrEmpty(Model.FacebookLink))
+                            {
+                                <li class="facebook">
+                                    <a title="facebook" href="@Model.FacebookLink" rel="noopener" target="_blank">
+                                        <span class="lni lni-facebook-oval"></span>
+                                        <span class="sr-only">Facebook</span>
+
+                                    </a>
+                                </li>
+                            }
+                            @if (!string.IsNullOrEmpty(Model.TwitterLink))
+                            {
+                                <li class="twitter">
+                                    <a title="twitter" href="@Model.TwitterLink" rel="noopener" target="_blank">
+                                        <span class="lni lni-twitter-original"></span>
+                                        <span class="sr-only">twitter</span>
+                                    </a>
+                                </li>
+                            }
+                            @if (Model.NewsEnabled)
+                            {
+                                <li class="rss">
+                                    <a title="rss" href="@Url.RouteUrl("NewsRSS", new {languageId = Model.WorkingLanguageId})" rel="noopener" target="_blank">
+                                        <span class="lni lni-rss-feed"></span>
+                                        <span class="sr-only">@T("NewsRSS")</span>
+                                    </a>
+                                </li>
+                            }
+                            @if (!string.IsNullOrEmpty(Model.YoutubeLink))
+                            {
+                                <li class="youtube">
+                                    <a title="youtube" href="@Model.YoutubeLink" rel="noopener" target="_blank">
+                                        <span class="lni lni-youtube"></span>
+                                        <span class="sr-only">youtube</span>
+                                    </a>
+                                </li>
+                            }
+                            @if (!string.IsNullOrEmpty(Model.InstagramLink))
+                            {
+                                <li class="instagram">
+                                    <a href="@Model.InstagramLink" rel="noopener" target="_blank">
+                                        <span class="lni lni-instagram-filled"></span>
+                                        <span class="sr-only">instagram</span>
+                                    </a>
+                                </li>
+                            }
+                            @if (!string.IsNullOrEmpty(Model.LinkedInLink))
+                            {
+                                <li class="linkedin">
+                                    <a href="@Model.LinkedInLink" rel="noopener" target="_blank">
+                                        <span class="lni lni-linkedin-original"></span>
+                                        <span class="sr-only">linkedin</span>
+                                    </a>
+                                </li>
+                            }
+                            @if (!string.IsNullOrEmpty(Model.PinterestLink))
+                            {
+                                <li class="pinterest">
+                                    <a href="@Model.PinterestLink" rel="noopener" target="_blank">
+                                        <span class="sr-only">pinterest</span>
+                                        <span class="lni lni-pinterest"></span>
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                    @if  (Model.Topics.Where(x => x.IncludeInFooterRow3).ToList().Any())
+                    {
+                        <div class="col-12">
+                            <ul class="d-inline-flex flex-wrap">
+                                @foreach (var topic in Model.Topics.Where(x => x.IncludeInFooterRow3).ToList())
+                                {
+                                    <li><a href="@Url.RouteUrl("Topic", new { SeName = topic.SeName })">@topic.Name</a></li>
+                                }
+                            </ul>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="footer-lower small">
+            <div class="row justify-content-sm-between justify-content-center px-sm-0 px-3">
+                <div class="pb-1 pt-1 copyright">
+                    <span class="footer-disclaimer">@T("Content.CopyrightNotice", DateTime.Now.Year, Model.StoreName)</span>
+                    @if (Model.DisplayTaxShippingInfoFooter)
+                    {
+                        <span class="footer-tax-shipping">
+                            @T(Model.InclTax ? "Footer.TaxShipping.InclTax" : "Footer.TaxShipping.ExclTax", Url.RouteUrl("Topic", new { SeName = await Html.GetTopicSeName("shippinginfo", Context) }))
+                        </span>
+                    }
+                </div>
+                @await Component.InvokeAsync("StoreThemeSelector")
+                @if (!Model.HidePoweredByGrandNode)
+                {
+                    <div class="pb-1 pt-1 text-center">
+                        <a class="pr-1 text-success" href="#"></a><span> </span><a href="#"> </a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    @await Component.InvokeAsync("Widget", new { widgetZone = "footer" })
+</footer>
+<a href="#" id="back-to-top" title="Back to top">
+    <span class="lni lni-chevron-up"></span>
+    <span class="sr-only">back to top</span>
+</a>

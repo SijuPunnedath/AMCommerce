@@ -1,0 +1,67 @@
+﻿@model IList<CategoryModel>
+@inject DisplayOrderHomePage order
+<div class="product-grid col-12 px-0 mt-lg-4 mt-3 order-@order.CategoryFeaturedProducts">
+        @foreach (var item in Model)
+        {   <div class="category-theme flex-grid row mb-lg-5 mb-4">
+                <div class="categories col-xl-@order.CF_c_Xl col-lg-@order.CF_c_Lg col-md-@order.CF_c_Md col-sm-@order.CF_c_Sm col-@order.CF_c_Col">
+                    <div class="card mb-0 custom-card">
+                        <div class="custom-header">
+                            <h5>
+                                <a href="@Url.RouteUrl("Category", new { SeName = item.SeName })">
+                                    @item.Name
+                                    @if (item.GenericAttributes.Any())
+                                    {
+                                        
+                                        var alternativFeaturedName = item.GenericAttributes.FirstOrDefault(x => x.Key == "alternativFeaturedName")?.Value;
+                                        
+                                        @if (!string.IsNullOrEmpty(alternativFeaturedName))
+                                        {
+                                            @Html.Raw(alternativFeaturedName)
+                                        }
+                                    }
+                                </a>
+                            </h5>
+                        </div>
+                        <div class="featured-list-picture">
+                            <a href="@Url.RouteUrl("Category", new { SeName = item.SeName })" title="@item.PictureModel.Title">
+                                <img class="img-fluid lazyload" alt="@item.PictureModel.AlternateText" data-src="@item.PictureModel.ImageUrl" title="@item.PictureModel.Title" />
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="products mt-md-0 mt-3 d-flex align-items-center col-xl-@order.CF_p_Xl col-lg-@order.CF_p_Lg col-md-@order.CF_p_Md col-sm-@order.CF_p_Sm col-@order.CF_p_Col">
+                    <div class="swiper-container featured-product-slider lazyload">
+                        <div class="custom-loader-container">
+                            <div class="loader-5"><span></span></div>
+                        </div>
+                        <div class="swiper-wrapper">
+                            @foreach (var product in item.FeaturedProducts)
+                            {
+                                <div class="swiper-slide featured-product-container">
+                                    <partial name="_ProductBoxFeatured" model="product" />
+                                </div>
+                            }
+                        </div>
+                        <div class="swiper-custom-prev">
+                            <span></span>
+                        </div>
+                        <div class="swiper-custom-next">
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="swiper-pagination custom-pagination"></div>
+                </div>
+                
+                @*<div class="products col-xl-@order.CF_p_Xl col-lg-@order.CF_p_Lg col-md-@order.CF_p_Md col-sm-@order.CF_p_Sm col-@order.CF_p_Col">
+                    <div class="row flex-grid">
+                        @foreach (var product in item.FeaturedProducts)
+                        {
+                            <div class="col-xl-@order.CF_pp_Xl col-lg-@order.CF_pp_Lg col-md-@order.CF_pp_Md col-sm-@order.CF_pp_Sm col-@order.CF_pp_Col featured-product-container">
+                                <partial name="_ProductBoxFeatured" model="product" />
+                            </div>
+                        }
+                    </div>
+                </div>*@
+            </div>
+        }
+</div>

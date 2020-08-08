@@ -1,0 +1,13 @@
+﻿@{
+    Layout = "_RootHome";
+}
+@if (IsSectionDefined("Breadcrumb"))
+{
+    @section Breadcrumb {
+        @RenderSection("Breadcrumb")
+    }
+}
+
+@await Component.InvokeAsync("Widget", new { widgetZone = "main_column_before" })
+@RenderBody()
+@await Component.InvokeAsync("Widget", new { widgetZone = "main_column_after" })

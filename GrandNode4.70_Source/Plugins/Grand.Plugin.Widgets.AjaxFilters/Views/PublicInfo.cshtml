@@ -1,0 +1,80 @@
+﻿@model Grand.Plugin.Widgets.AjaxFilters.Models.PublicInfoModel
+@using Grand.Framework
+@{
+    Html.AddCssFileParts("~/Plugins/Widgets.AjaxFilters/Content/style.css");
+    Html.AppendScriptParts(ResourceLocation.Footer, "~/Plugins/Widgets.AjaxFilters/Content/ajaxfilter.manager.js");
+    Html.AddCssFileParts("~/Plugins/Widgets.AjaxFilters/Content/jquery-ui-1.12.1.custom/jquery-ui.min.css");
+    Html.AppendScriptParts(ResourceLocation.Footer, "~/Plugins/Widgets.AjaxFilters/Content/jquery-ui-1.12.1.custom/jquery-ui.min.js");
+}
+@{
+    <div class="d-flex">
+        <input type="button" class="button clearAllfilters mb-2" style="display:none;" value="@T("Plugin.Widgets.AjaxFilters.ClearAll")" />
+        <input type="button" class="button closeAllFilters open" value="@T("Plugin.Widgets.AjaxFilters.Toggle")" />
+    </div>
+}
+
+<form id="ajaxfilter-form" action="">
+    <div class="selectedOptions">
+    </div>
+    <input type="hidden" name="CategoryId" value=@(Model.CategoryId)>
+    <input type="hidden" name="ManufacturerId" value=@(Model.ManufacturerId)>
+    <input type="hidden" name="EnableManufacturersFilter" value="@(Model.EnableManufacturersFilter.ToString())">
+    <input type="hidden" name="EnableVendorsFilter" value="@(Model.EnableVendorsFilter.ToString())">
+    <input type="hidden" name="EnablePriceRangeFilter" value="@(Model.EnablePriceRangeFilter.ToString())">
+    <input type="hidden" name="EnableSpecificationsFilter" value="@(Model.EnableSpecificationsFilter.ToString())">
+    <input type="hidden" name="EnableAttributesFilter" value="@(Model.EnableAttributesFilter.ToString())">
+    <input type="hidden" name="ViewMode" id="ViewMode" value="@(Model.ViewMode)">
+    <input type="hidden" name="PageSize" id="PageSize" value="@(Model.PageSize)">
+    <input type="hidden" name="SortOption" id="SortOption" value="@(Model.SortOption)">
+    <input type="hidden" name="PageNumber" id="PageNumber" value="@(Model.PageNumber)">
+    <input type="hidden" name="Count" id="Count" value="@(Model.Count)">
+    <div class="ajax-filter-section">
+        @{
+            if (Model.EnablePriceRangeFilter)
+            {
+                @Html.Partial("~/Plugins/Widgets.AjaxFilters/Views/FilterPriceRange.cshtml", Model.filterPriceModel);
+            }
+            if (Model.EnableManufacturersFilter)
+            {
+                @Html.Partial("~/Plugins/Widgets.AjaxFilters/Views/FilterManufacturers.cshtml", Model.manufacturerModel);
+            }
+            if (Model.EnableSpecificationsFilter)
+            {
+                @Html.Partial("~/Plugins/Widgets.AjaxFilters/Views/FilterSpecifications.cshtml", Model.specyficationModel);
+            }
+
+            if (Model.EnableVendorsFilter)
+            {
+                @Html.Partial("~/Plugins/Widgets.AjaxFilters/Views/FilterVendors.cshtml", Model.vendorsModel);
+            }
+
+            if (Model.EnableAttributesFilter)
+            {
+                @Html.Partial("~/Plugins/Widgets.AjaxFilters/Views/FilterAttributes.cshtml", Model.attributesModel);
+            }
+        }
+    </div>
+</form>
+
+
+<script type="text/javascript" asp-location="Footer">
+    $(document).ready(function () {
+
+        if ($(".product-grid").not(".featured-product-grid").length) {
+            $("<div class='ajax-products'></div>").insertBefore('.product-grid:not(".featured-product-grid")');
+            $('.product-grid:not(".featured-product-grid")').appendTo('.ajax-products');
+        }
+        if ($(".product-list").not(".featured-product-grid").length) {
+            $("<div class='ajax-products'></div>").insertBefore('.product-list:not(".featured-product-grid")');
+            $('.product-list:not(".featured-product-grid")').appendTo('.ajax-products');
+        }
+        $('.pager').appendTo('.ajax-products');
+        AjaxFilter.init('@Url.RouteUrl("Plugins.Widgets.AjaxFilters.ReloadFilters")', '@(Context.Request.QueryString.HasValue ? Context.Request.QueryString.ToString() : "" )', '@(Context.Request.Path)');
+        @if(Context.Request.QueryString.HasValue)
+        {
+            <text>
+                AjaxFilter.setFilter('update');
+            </text>
+        }
+    });
+</script>

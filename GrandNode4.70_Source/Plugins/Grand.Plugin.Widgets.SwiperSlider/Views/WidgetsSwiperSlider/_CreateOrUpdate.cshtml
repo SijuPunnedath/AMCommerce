@@ -1,0 +1,74 @@
+﻿@model Grand.Plugin.Widgets.SwiperSlider.Models.SlideConfigurationModel
+@Html.ValidationSummary(false)
+
+@using (Html.BeginForm())
+{
+    <antiforgery-token />
+    <div class="text-right">
+        <button type="submit" name="save" class="btn green">
+            <i class="fa fa-floppy-o"></i>
+            @T("Admin.Common.Save")
+        </button>
+    </div>
+    <div class="panel-group">
+        <div class="form-horizontal">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div id="plugin-configure">
+                        <ul>
+                            <li tab-index="0" class="k-state-active">
+                                @T("grand.Widget.SwiperSlider.General")
+                            </li>
+                            <li tab-index="1">
+                                @T("grand.Widget.SwiperSlider.Mappings")
+                            </li>
+                            <li tab-index="2">
+                                @T("grand.Widget.SwiperSlider.picture")
+                            </li>
+                            <li tab-index="3">
+                                @T("grand.Widget.SwiperSlider.Animations")
+                            </li>
+                            <li tab-index="4">
+                                @T("grand.Widget.SwiperSlider.Stores")
+                            </li>
+                        </ul>
+
+                        <div>
+                            <partial name="_CreateOrUpdate.TabInfo.cshtml" model="Model" />
+                        </div>
+                        <div>
+                            <partial name="_CreateOrUpdate.TabMappings.cshtml" model="Model" />
+                        </div>
+                        <div>
+                            <partial name="_CreateOrUpdate.TabPictures.cshtml" model="Model" />
+                        </div>
+                        <div>
+                            <partial name="_CreateOrUpdate.TabAnimations.cshtml" model="Model" />
+                        </div>
+                        <div>
+                            <partial name="_CreateOrUpdate.TabStores.cshtml" model="Model" />
+                        </div>
+
+                    </div>
+
+                    @*save selected tab index*@
+                    <input type="hidden" id="selected-tab-index" name="selected-tab-index" value="@(GetSelectedTabIndex())">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        $(document).ready(function () {
+            $("#plugin-configure").kendoTabStrip({
+                animation: {
+                    open: {
+                        effects: "fadeIn"
+                    }
+                },
+                select: tabstrip_on_tab_select
+            });
+        });
+    </script>
+}

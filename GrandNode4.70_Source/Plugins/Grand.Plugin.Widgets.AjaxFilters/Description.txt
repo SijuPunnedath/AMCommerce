@@ -1,0 +1,9 @@
+﻿Group: Widgets
+FriendlyName: AjaxFilters
+SystemName: Widgets.AjaxFilters
+Version: 4.70.001
+SupportedVersions: 4.70
+Author: grandnode team
+DisplayOrder: 1
+FileName: Grand.Plugin.Widgets.AjaxFilters.dll
+Description: This plugin allows you to filters products on category page

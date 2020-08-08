@@ -1,0 +1,25 @@
+﻿@model IList<ProductOverviewModel>
+@inject DisplayOrderHomePage order
+<div class="col-xl-3 col-lg-4 col-12 mt-lg-0 mt-4 product-grid recommended-product-grid order-lg-0 order-1">
+    @*<h2 class="generalTitle text-center">
+        @T("HomePage.Recommended.Products")
+    </h2>*@
+        <div class="recommended-product">
+            <div class="custom-header">
+                <h5>@T("HomePage.Recommended.Products")</h5>
+            </div>
+            <div id="RecommendedProducts" class="swiper-container lazyload">
+                <div class="custom-loader-container">
+                    <div class="loader-5"><span></span></div>
+                </div>
+                <div class="swiper-wrapper">
+                    @foreach (var item in Model)
+                    {
+                        <div class="swiper-slide">
+                            <partial name="_ProductBoxRecommended" model="item" />
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+</div>

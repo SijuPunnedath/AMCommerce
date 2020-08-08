@@ -1,0 +1,12 @@
+﻿foodtheme.categories - All Depeartments
+Footer.Phone.Title - Any Questions? Call us!
+catalog.noproducts - No more products...
+foodtheme.deliverydate.first - If you make order in
+foodtheme.deliverydate.second - We send you this porduct today.
+foodtheme.deliverydata.third - We will send this product tomorrow.
+food.gotoproduct - Go to Product
+foodtheme.selectall - Select All
+countdown.days - Days
+countdown.hours
+countdown.minutes
+countdown.seconds

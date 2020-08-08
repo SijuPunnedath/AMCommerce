@@ -1,0 +1,57 @@
+﻿@model Grand.Plugin.Widgets.AjaxFilters.Models.FilterManufacturersModel
+@using Grand.Plugin.Widgets.AjaxFilters
+
+@if (Model.Manufacturers != null && Model.Manufacturers.Count > 0)
+{
+    <div id="manufacturers-filter-section">
+
+        <div class="manufacturer-section">
+            <div class="filter-section">
+                <div class="title">
+                    <span class="ajaxfilter-title" style="float:left">
+                        @T("Plugin.Widgets.AjaxFilters.Manufacturers")
+                    </span>
+                    <span class="arrowHold"></span>
+
+                </div>
+                <div class="ajaxfilter-section">
+                    @if (Model.CheckOrDropdown == AjaxFiltersUI.UseCheckboxes)
+                    {
+                        <ul>
+                            @for (int i = 0; i < Model.Manufacturers.OrderBy(pva => pva.Name).Count(); i++)
+                            {
+                                var manufacturerFilterItem = Model.Manufacturers.OrderBy(pva => pva.Name).ElementAt(i);
+
+                                <li class="square @(manufacturerFilterItem.CheckedState == CheckedState.Checked ? "active" : "") Name-@(manufacturerFilterItem.Id)" id="square_specyficationModel_SpecificationAttributes_@(manufacturerFilterItem.Id)_@(i)_Id"></li>
+
+                                <li data-id="@manufacturerFilterItem.Id">
+                                    <input class="Name-@manufacturerFilterItem.Id" type="checkbox" name="manufacturerModel][Manufacturers][@i][Id" value="@manufacturerFilterItem.Id" onchange="listenToCheckBox(this, 'Name-@manufacturerFilterItem.Id', '@manufacturerFilterItem.Name'), AjaxFilter.setFilter('m'), resetFilters() " id="manufacturerModel_Manufacturers_@(i)_Id"
+                                           @(manufacturerFilterItem.CheckedState == CheckedState.Checked ? "Checked" : "")
+                                           @(manufacturerFilterItem.CheckedState == CheckedState.Disabled ? "Disabled" : "")
+                                           @(manufacturerFilterItem.CheckedState == CheckedState.CheckedDisabled ? "Disabled Checked" : "") />
+                                    <input type="hidden" name="manufacturerModel][Manufacturers][@i][Id" value=@(manufacturerFilterItem.CheckedState == CheckedState.CheckedDisabled ? manufacturerFilterItem.Id.ToString() : "")>
+                                    <input type="hidden" name="manufacturerModel][Manufacturers][@i][Count" value="@manufacturerFilterItem.Count">
+                                    <input type="hidden" name="manufacturerModel][Manufacturers][@i][Name" value="@manufacturerFilterItem.Name">
+
+                                    <label for="manufacturerModel_Manufacturers_@(i)_Id">@manufacturerFilterItem.Name <span>(@manufacturerFilterItem.Count)</span></label>
+                                </li>
+                            }
+                        </ul>
+                    }
+                    else if (Model.CheckOrDropdown == AjaxFiltersUI.UseDropdowns)
+                    {
+                        <select name="manufacturerModel][Manufacturers][0][Id" class="group-dropdown" id="manufacturerModel_Manufacturers_0_Id" onchange="AjaxFilter.setFilter('m'), listenToSelect('manufacturerModel_Manufacturers_0_Id')">
+                            <option value="" selected="selected"> @(Model.Manufacturers.Where(x => x.CheckedState != CheckedState.Disabled).Count() > 0 ? T("Plugin.Widgets.AjaxFilters.Filter.All") : T("Plugin.Widgets.AjaxFilters.Filter.Empty"))</option>
+                            @foreach (var manufacturerFilterItem in Model.Manufacturers.Where(x => x.CheckedState != CheckedState.Disabled).OrderBy(pva => pva.Name))
+                            {
+                                var selected = manufacturerFilterItem.CheckedState == CheckedState.Checked || manufacturerFilterItem.CheckedState == CheckedState.CheckedDisabled;
+                                <option value="@manufacturerFilterItem.Id" selected="@selected">@manufacturerFilterItem.Name</option>
+                            }
+                        </select>
+                    }
+                </div>
+
+            </div>
+        </div>
+    </div>
+}

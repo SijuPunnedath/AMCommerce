@@ -1,0 +1,127 @@
+﻿@{
+    Layout = "_ConfigurePlugin";
+}
+@model Grand.Plugin.Widgets.AjaxFilters.Models.ConfigurationModel
+@using Grand.Framework
+@using Grand.Plugin.Widgets.AjaxFilters
+
+<script>
+    $(document).ready(function () {
+        $("#@Html.IdFor(model => model.FilterEnableManufacturers)").click(filterEnableManufacturers);
+        filterEnableManufacturers();
+
+        $("#@Html.IdFor(model => model.FilterEnableVendors)").click(filterEnableVendors);
+        filterEnableVendors();
+
+        $("#@Html.IdFor(model => model.FilterEnableSpecifications)").click(filterEnableSpecifications);
+        filterEnableSpecifications();
+
+        $("#@Html.IdFor(model => model.FilterEnableAttributes)").click(filterEnableAttributes);
+        filterEnableAttributes();
+
+    });
+
+    function filterEnableManufacturers() {
+        if ($('#@Html.IdFor(model => model.FilterEnableManufacturers)').is(':checked')) {
+            $('#ctEnableManufacturers').show();
+        } else {
+            $('#ctEnableManufacturers').hide();
+        }
+    }
+
+    function filterEnableVendors() {
+        if ($('#@Html.IdFor(model => model.FilterEnableVendors)').is(':checked')) {
+            $('#ctEnableVendors').show();
+        } else {
+            $('#ctEnableVendors').hide();
+        }
+    }
+
+    function filterEnableSpecifications() {
+        if ($('#@Html.IdFor(model => model.FilterEnableSpecifications)').is(':checked')) {
+            $('#ctEnableSpecifications').show();
+        } else {
+            $('#ctEnableSpecifications').hide();
+        }
+    }
+
+    function filterEnableAttributes() {
+        if ($('#@Html.IdFor(model => model.FilterEnableAttributes)').is(':checked')) {
+            $('#ctEnableAttributes').show();
+        } else {
+            $('#ctEnableAttributes').hide();
+        }
+    }
+</script>
+<form asp-controller="AjaxFilters" asp-action="Configure" method="post">
+    <antiforgery-token />
+    <div class="form-horizontal">
+        <div class="form-body">
+            <div class="form-group">
+                <admin-label asp-for="FilterWidgetZone" />
+                <div class="col-md-9 col-sm-9">
+                    <admin-input asp-for="FilterWidgetZone" />
+                </div>
+            </div>
+            <div class="form-group">
+                <admin-label asp-for="FilterEnablePriceRange" />
+                <div class="col-md-9 col-sm-9">
+                    <input asp-for="FilterEnablePriceRange" />
+                </div>
+            </div>
+            <div class="form-group">
+                <admin-label asp-for="FilterEnableManufacturers" />
+                <div class="col-md-9 col-sm-9">
+                    <input asp-for="FilterEnableManufacturers" />
+                </div>
+            </div>
+            <div class="form-group" id="ctEnableManufacturers">
+                <admin-label asp-for="FilterManufacturerCheckOrDropdown" />
+                <div class="col-md-9 col-sm-9">
+                    <admin-select asp-for="FilterManufacturerCheckOrDropdown" asp-items="((AjaxFiltersUI)Model.FilterManufacturerCheckOrDropdown).ToSelectList()" />
+                </div>
+            </div>
+            <div class="form-group">
+                <admin-label asp-for="FilterEnableVendors" />
+                <div class="col-md-9 col-sm-9">
+                    <input asp-for="FilterEnableVendors" />
+                </div>
+            </div>
+            <div class="form-group" id="ctEnableVendors">
+                <admin-label asp-for="FilterVendorCheckOrDropdown" />
+                <div class="col-md-9 col-sm-9">
+                    <admin-select asp-for="FilterVendorCheckOrDropdown" asp-items="((AjaxFiltersUI)Model.FilterVendorCheckOrDropdown).ToSelectList()" />
+                </div>
+            </div>
+            <div class="form-group">
+                <admin-label asp-for="FilterEnableSpecifications" />
+                <div class="col-md-9 col-sm-9">
+                    <input asp-for="FilterEnableSpecifications" />
+                </div>
+            </div>
+            <div class="form-group" id="ctEnableSpecifications">
+                <admin-label asp-for="FilterSpecyficationCheckOrDropdown" />
+                <div class="col-md-9 col-sm-9">
+                    <admin-select asp-for="FilterSpecyficationCheckOrDropdown" asp-items="((AjaxFiltersUI)Model.FilterSpecyficationCheckOrDropdown).ToSelectList()" />
+                </div>
+            </div>
+            <div class="form-group">
+                <admin-label asp-for="FilterEnableAttributes" />
+                <div class="col-md-9 col-sm-9">
+                    <input asp-for="FilterEnableAttributes" />
+                </div>
+            </div>
+            <div class="form-group" id="ctEnableAttributes">
+                <admin-label asp-for="FilterAttributesCheckOrDropdown" />
+                <div class="col-md-9 col-sm-9">
+                    <admin-select asp-for="FilterAttributesCheckOrDropdown" asp-items="((AjaxFiltersUI)Model.FilterAttributesCheckOrDropdown).ToSelectList()" />
+                </div>
+            </div>
+        </div>
+        <div class="form-actions">
+            <div class="col-md-offset-3 col-sm-offset-3 col-md-9 col-sm-9">
+                <input type="submit" name="save" class="btn green" value="@T(" Admin.Common.Save")" />
+            </div>
+        </div>
+    </div>
+</form>

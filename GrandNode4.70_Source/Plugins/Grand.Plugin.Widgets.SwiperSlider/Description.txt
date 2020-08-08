@@ -1,0 +1,9 @@
+﻿Group: Widgets
+FriendlyName: Swiper
+SystemName: Widgets.SwiperSlider
+Version: 4.70.001
+SupportedVersions: 4.70
+Author: grandnode team
+DisplayOrder: 1
+FileName: Grand.Plugin.Widgets.SwiperSlider.dll
+Description: This plugin allows you to create sliders

@@ -1,0 +1,21 @@
+﻿@model BlogPostTagListModel
+@using Grand.Web.Models.Blogs
+@if (Model.Tags.Any())
+{
+    <div id="block-popular-blogtags" class="block block-popular-blogtags">
+        <h5 class="h5">
+            <strong>@T("Blog.TagCloud")</strong>
+            <span class="arrowHold"></span>
+        </h5>
+        <div class="viewBox listbox">
+            <div class="product-tags-list">
+                @foreach (var item in Model.Tags)
+                {
+                    <a class="btn btn-sm btn-outline-secondary" href="@Url.RouteUrl("BlogByTag", new { tag = item.Name })" style="font-size:@(Model.GetFontSize(item))%;">
+                        @item.Name
+                    </a>
+                }
+            </div>
+        </div>
+    </div>
+}

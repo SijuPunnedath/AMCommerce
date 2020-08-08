@@ -1,0 +1,52 @@
+﻿@model ProductDetailsModel
+@inject CatalogSettings catalogSettings
+<div class="row">
+    <div class="form-group col-12 mb-0">
+        @if (Model.EndTime.HasValue)
+        {
+            <div class="countdown-box">
+                @if (Model.EndTime > DateTime.UtcNow)
+                {
+                    <div class="countdown-container">
+                                    <div class="time-holder">
+                                        <div class="countdown days" data-countdown="@Model.EndTime.Value.ToLocalTime().ToString("yyyy-MM-dd HH:mm")"></div>
+                                        <div class="title">@T("countdown.days")</div>
+                                    </div>
+                                    <div class="time-holder">
+                                        <div class="countdown hours" data-countdown="@Model.EndTime.Value.ToLocalTime().ToString("yyyy-MM-dd HH:mm")"></div>
+                                        <div class="title">@T("countdown.hours")</div>
+                                    </div>
+                                    <div class="time-holder">
+                                        <div class="countdown minutes" data-countdown="@Model.EndTime.Value.ToLocalTime().ToString("yyyy-MM-dd HH:mm")"></div>
+                                        <div class="title">@T("countdown.minutes")</div>
+                                    </div>
+                                    <div class="time-holder">
+                                        <div class="countdown seconds" data-countdown="@Model.EndTime.Value.ToLocalTime().ToString("yyyy-MM-dd HH:mm")"></div>
+                                        <div class="title">@T("countdown.seconds")</div>
+                                    </div>
+                                </div>
+                }
+                else
+                {
+                    <div class="d-inline-flex flex-wrap justify-content-center">
+                        <label class="ended-label mb-0">@T("ShoppingCart.Auctionends"):</label>
+                        <div class="count-date">@Model.EndTimeLocalTime.Value.ToString()</div>
+                    </div>
+                }
+            </div>
+        }
+        @if (Model.EndTime > DateTime.UtcNow)
+        {
+            <div class="qty-container">
+                <input asp-for="HighestBidValue" class="form-control catalog-quantity" type="text" value="@(Model.HighestBidValue > 0 ? (Model.HighestBidValue + 1).ToString(System.Globalization.CultureInfo.InvariantCulture) : (Model.StartPrice + 1).ToString(System.Globalization.CultureInfo.InvariantCulture))" />
+                <div class="qty-controls">
+                    <span class="lni lni-plus" onclick="$(this).parents('.qty-container').find('.catalog-quantity').attr('value',function (i, oldval) {return ++oldval;}).trigger('change')"></span>
+                    <span class="lni lni-minus" onclick="$(this).parents('.qty-container').find('.catalog-quantity').attr('value', function (i, oldval) {if(oldval>1){ return --oldval; } else { return oldval}}).trigger('change')"></span>
+                </div>
+            </div>
+            <button type="button" id="bid-button-@Model.Id" class="btn btn-info add-to-cart-button" data-productid="@Model.Id" onclick="AjaxCart.addbid('@Url.RouteUrl("AddBid", new { productId = Model.Id, shoppingCartTypeId = (int)ShoppingCartType.Auctions })', '#product-details-form');return false;">
+                <span class="mdi mdi-gavel mr-1"></span><span>@T("ShoppingCart.Bid")</span>
+            </button>
+        }
+    </div>
+</div>

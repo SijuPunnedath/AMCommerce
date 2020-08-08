@@ -1,0 +1,96 @@
+﻿@model HeaderLinksModel
+@using System.Text.Encodings.Web
+@inject Grand.Core.IWebHelper webHelper
+@inject Grand.Core.Domain.Customers.CustomerSettings customersettings
+@{
+    var registerUrl = Url.RouteUrl("Register", new { returnUrl = this.Context.Request.Query["returnUrl"] });
+}
+
+@await Component.InvokeAsync("Widget", new { widgetZone = "header_links_before" })
+@if (Model.IsAuthenticated)
+{
+    @await Component.InvokeAsync("AdminHeaderLinks")
+    <li class="nav-item">
+        <a class="d-flex align-items-center nav-link btn btn-outline-secondary" href="@Url.RouteUrl("CustomerInfo")">
+            <span class="lni lni-user"></span>
+            <span class="text text-uppercase ml-3">@T("Account.MyAccount")</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="d-flex align-items-center nav-link btn btn-outline-secondary" href="@Url.RouteUrl("CustomerOrders")">
+            <span class="lni lni-cart"></span>
+            <span class="text text-uppercase ml-3">@T("Account.CustomerOrders")</span>
+        </a>
+    </li>
+    @if (Model.AllowPrivateMessages)
+    {
+        <li class="nav-item">
+            <a class="d-flex align-items-center nav-link btn btn-outline-secondary" href="@Url.RouteUrl("PrivateMessages", new { tab = "" })">
+                <span class="lni lni-envelope"></span>
+                <span class="text text-uppercase ml-3">@T("PrivateMessages.Inbox")</span>
+                <span class="inbox-unread">@Model.UnreadPrivateMessages</span>
+            </a>
+        </li>
+    }
+    <li class="nav-item">
+        <a class="d-flex align-items-center nav-link btn btn-outline-secondary" href="@Url.RouteUrl("Logout")">
+            <span class="lni lni-lock-alt"></span>
+            <span class="text text-uppercase ml-3">@T("Account.Logout")</span>
+        </a>
+    </li>
+}
+else
+{
+    <li class="nav-item">
+        <form class="py-3" asp-route="Login" asp-route-returnurl="@Context.Request.Query["ReturnUrl"]" method="post" id="login-nav">
+            <div class="form-group">
+                @if (customersettings.UsernamesEnabled)
+                {
+                    <label class="col-form-label">@T("account.login.fields.username")</label>
+                    <input autofocus="autofocus" class="form-control username valid" data-val="true" data-val-username="@T("account.fields.username.notvalid")" data-val-required="@T("account.fields.username.required")" id="Username" name="Username" type="text" value="" required>
+                }
+                else
+                {
+                    <label class="col-form-label">@T("account.login.fields.email")</label>
+                    <input autofocus="autofocus" class="form-control email valid" data-val="true" data-val-email="@T("common.wrongemail")" data-val-required="@T("account.login.fields.email.required")" id="Email" name="Email" type="text" value="" required>
+                }
+            </div>
+            <div class="form-group">
+                <label class="col-form-label">Password</label>
+                <input class="form-control password valid" id="Password" name="Password" type="password">
+            </div>
+            <div class="w-100 text-center button">
+                <button type="submit" class="btn btn-info text-uppercase w-100">@T("Account.Login")</button>
+            </div>
+            <div class="w-100 text-center my-2">
+                <a class="h5 mb-0" asp-route="PasswordRecovery">@T("Account.Login.ForgotPassword")</a>
+            </div>
+            @*<label for="RememberMe" class="custom-control custom-checkbox">
+            <input class="custom-control-input" data-val="true" data-val-required="'Remember Me' must not be empty." id="RememberMe" name="RememberMe" type="checkbox" value="true">
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description">@T("keepmeloggedin")</span>
+        </label>*@
+        </form>
+    </li>
+    <li class="nav-item text-center">
+        <span class="w-100 d-flex h5 justify-content-center mb-3"><strong>Don't have an account?</strong></span>
+        <a class="btn btn-secondary" href="@registerUrl">
+            <span class="text text-uppercase">@T("Account.Register")</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <div class="text-center generalMarginSupporter">
+            @T("Account.Login.NewCustomerText")
+        </div>
+    </li>
+}
+@await Component.InvokeAsync("Widget", new { widgetZone = "header_links_after" })
+@if (Model.AllowPrivateMessages && !string.IsNullOrEmpty(Model.AlertMessage))
+{
+    //new private message notification
+    <script asp-location="Footer">
+            $(document).ready(function () {
+                displayPopupNotification('@Html.Raw(JavaScriptEncoder.Default.Encode(Model.AlertMessage))', 'success', false);
+            });
+    </script>
+}

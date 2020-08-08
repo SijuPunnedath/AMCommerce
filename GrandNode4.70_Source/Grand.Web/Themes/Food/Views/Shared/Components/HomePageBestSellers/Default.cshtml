@@ -1,0 +1,28 @@
+﻿@model IList<ProductOverviewModel>
+    @inject DisplayOrderHomePage order
+    <h2 class="generalTitle text-center mt-lg-5 mt-3">@T("bestsellers")</h2>
+    @if (Model.Any())
+    {
+        <div class="product-grid landing-page-container bestsellers lazyload order-@order.HomePageBestSellers" data-title="@T("bestsellers")">
+            <div class="custom-loader-container">
+                <div class="loader-5"><span></span></div>
+            </div>
+            <div id="BestProd" class="swiper-container landing-page">
+                <div class="swiper-wrapper">
+                    @foreach (var item in Model)
+                    {
+                        <div class="swiper-slide">
+                            <partial name="_ProductBoxLanding" model="item" />
+                        </div>
+                    }
+                </div>
+                <div class="swiper-custom-prev">
+                    <span></span>
+                </div>
+                <div class="swiper-custom-next">
+                    <span></span>
+                </div>
+                <div class="custom-pagination"></div>
+            </div>
+        </div>
+    }

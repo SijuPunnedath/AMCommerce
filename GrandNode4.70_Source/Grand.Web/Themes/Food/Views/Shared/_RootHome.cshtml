@@ -1,0 +1,65 @@
+﻿@inject IThemeContext themeContext
+
+@{
+    Layout = "_Root.Head";
+
+    var themeName = themeContext.WorkingThemeName;
+
+    Html.AppendCssFileParts(ResourceLocation.Head, string.Format("~/Themes/{0}/Content/css/swiper.min.css", themeName));
+    Html.AppendScriptParts(ResourceLocation.Footer, string.Format("~/Themes/{0}/Content/js/home.js", themeName));
+    Html.AppendScriptParts(ResourceLocation.Footer, string.Format("~/Themes/{0}/Content/js/swiper.min.js", themeName));
+}
+@await Component.InvokeAsync("Widget", new { widgetZone = "body_start_html_tag_after" })
+<partial name="_Notifications" />
+<partial name="_JavaScriptDisabledWarning" />
+<partial name="_OldInternetExplorerWarning" />
+<main class="c-offcanvas-content-wrap">
+    <partial name="HeaderHome" />
+    <div class="page-container">
+        @await Component.InvokeAsync("Widget", new { widgetZone = "content_before" })
+        @if (IsSectionDefined("Breadcrumb"))
+        {
+            @RenderSection("Breadcrumb")
+        }
+        @RenderBody()
+        @await Component.InvokeAsync("Widget", new { widgetZone = "content_after" })
+    </div>
+    @await Component.InvokeAsync("Footer")
+    <div class="backdrop-menu"></div>
+</main>
+<a class="js-offcanvas-trigger filter-button d-none" data-offcanvas-trigger="leftSide" href="#leftSide"><span class="mdi mdi-tune"></span><span class="ml-3">@T("catalog.selectors.fiters")</span></a>
+<aside class="js-offcanvas mobile-filters d-lg-none d-flex flex-column" data-offcanvas-options='{"modifiers":"left,overlay","modal":true,"resize":false}' id="leftSide">
+    <div class="user-panel-head">
+        <div class="common-close" onclick="$('#leftSide').data('offcanvas-component').close()">
+            <span></span>
+        </div>
+    </div>
+</aside>
+<aside class="js-offcanvas" data-offcanvas-options='{"modifiers":"right,overlay","modal":true,"resize":false}' id="user_panel">
+    <div class="user-panel">
+        <div class="user-panel-head">
+            <span>@T("Account.MyAccount")</span>
+            <div class="common-close" onclick="$('#user_panel').data('offcanvas-component').close()">
+                <span></span>
+            </div>
+        </div>
+        <ul class="user-panel-content">
+            @await Component.InvokeAsync("Widget", new { widgetZone = "header_selectors" })
+            @await Component.InvokeAsync("HeaderLinks")
+        </ul>
+    </div>
+</aside>
+<aside class="js-offcanvas" data-offcanvas-options='{"modifiers":"left,overlay","modal":true,"resize":false}' id="mobile_menu"></aside>
+@await Component.InvokeAsync("FlyoutShoppingCart")
+<!-- Search Modal -->
+<div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        </div>
+    </div>
+</div>
+<script asp-location="Footer">
+    AjaxCart.init('.cart-qty', '.wishlist-qty', '.flyout-cart');
+</script>
+@await Component.InvokeAsync("EuCookieLaw")
+@await Component.InvokeAsync("Widget", new { widgetZone = "body_end_html_tag_before" })

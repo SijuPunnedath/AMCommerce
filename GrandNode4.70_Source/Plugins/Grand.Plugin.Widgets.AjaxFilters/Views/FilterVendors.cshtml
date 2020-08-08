@@ -1,0 +1,51 @@
+﻿@model Grand.Plugin.Widgets.AjaxFilters.Models.FilterVendorsModel
+@using Grand.Plugin.Widgets.AjaxFilters
+
+@if (Model.Vendors != null && Model.Vendors.Count > 0)
+{
+    <div id="vendors-filter-section">
+        <div class="vendors-section">
+            <div class="filter-section">
+                <div class="title">
+                    <span class="ajaxfilter-title" style="float:left">@T("Plugin.Widgets.AjaxFilters.Vendors")</span>
+
+                </div>
+
+                <div class="ajaxfilter-section">
+                    @if (Model.CheckOrDropdown == AjaxFiltersUI.UseCheckboxes)
+                    {
+                        <ul>
+                            @for (int i = 0; i < Model.Vendors.OrderBy(pva => pva.Name).Count(); i++)
+                            {
+                                var vendorFilterItem = Model.Vendors.OrderBy(pva => pva.Name).ElementAt(i);
+                                <li class="square @(vendorFilterItem.CheckedState == CheckedState.Checked ? "active" : "" ) Name-@(vendorFilterItem.Id)" id="square_vendorsModel_Vendors_@(i)_Id"></li>
+                                <li data-id="@vendorFilterItem.Id">
+                                    <input type="checkbox" name="vendorsModel][Vendors][@i][Id" value="@vendorFilterItem.Id" id="vendorsModel_Vendors_@(i)_Id" class="Name-@vendorFilterItem.Id"
+                                           @(vendorFilterItem.CheckedState == CheckedState.Checked ? "Checked" : "")
+                                           @(vendorFilterItem.CheckedState == CheckedState.Disabled ? "Disabled" : "")
+                                           @(vendorFilterItem.CheckedState == CheckedState.CheckedDisabled ? "Disabled Checked" : "")
+                                           onchange="listenToCheckBox(this, 'Name-@vendorFilterItem.Id', '@vendorFilterItem.Name'), AjaxFilter.setFilter('v'), resetFilters()" />
+                                    <input type="hidden" name="vendorsModel][Vendors][@i][Id" value=@(vendorFilterItem.CheckedState == CheckedState.CheckedDisabled ? vendorFilterItem.Id.ToString() : "")>
+                                    <input type="hidden" name="vendorsModel][Vendors][@i][Count" value="@vendorFilterItem.Count">
+                                    <label for="vendorsModel_Vendors_@(i)_Id">@vendorFilterItem.Name <span>(@vendorFilterItem.Count)</span></label>
+                                </li>
+                            }
+                        </ul>
+                    }
+                    else if (Model.CheckOrDropdown == AjaxFiltersUI.UseDropdowns)
+                    {
+                        <select name="vendorsModel][Vendors][0][Id" id="vendorsModel_Vendors_0_Id" onchange="AjaxFilter.setFilter('v')">
+                            <option value="" selected="selected">@(Model.Vendors.Where(x => x.CheckedState != CheckedState.Disabled).Count() > 0 ? T("Plugin.Widgets.AjaxFilters.Filter.All") : T("Plugin.Widgets.AjaxFilters.Filter.Empty"))</option>
+                            @foreach (var vendorFilterItem in Model.Vendors.Where(x => x.CheckedState != CheckedState.Disabled).OrderBy(pva => pva.Name))
+                            {
+                                var selected = vendorFilterItem.CheckedState == CheckedState.Checked || vendorFilterItem.CheckedState == CheckedState.CheckedDisabled;
+                                <option value="@vendorFilterItem.Id" selected="@selected">@vendorFilterItem.Name</option>
+                            }
+                        </select>
+                    }
+                </div>
+
+            </div>
+        </div>
+    </div>
+}

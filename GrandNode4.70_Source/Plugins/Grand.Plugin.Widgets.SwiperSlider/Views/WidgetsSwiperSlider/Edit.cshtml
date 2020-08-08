@@ -1,0 +1,23 @@
+﻿@model Grand.Plugin.Widgets.SwiperSlider.Models.SlideConfigurationModel
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminPopupLayout.cshtml";
+    //page title
+    ViewBag.Title = T("grand.widget.SwiperSlider.EditSlideDetails").Text;
+}
+
+<form asp-controller="Slides" asp-action="Edit" method="post">
+    
+    @if (ViewBag.RefreshPage == true)
+    {
+    <script type="text/javascript">
+        try {
+            window.opener.document.forms[0].sldRefreshSlides.click();
+        }
+        catch (e) { }
+        window.close();
+    </script>
+    }
+
+    @await Html.PartialAsync("~/Plugins/Widgets.SwiperSlider/Views/WidgetsSwiperSlider/_CreateOrUpdate.cshtml", Model)
+</form>

@@ -1,0 +1,49 @@
+﻿@model FooterCleanModel
+<footer class="mt-3">
+    <div class="container max-100">
+        @await Component.InvokeAsync("Widget", new { widgetZone = "before_footerclean" })
+        <div id="footer-block-about-us" class="col-lg-12 col-md-12 col-sm-12 footer-block about-us block">
+            <div class="viewBox">
+                <div id="footer-block-about-us" class="d-flex flex-row align-items-center">
+                    <div class="col-lg-5 px-2">
+                        <div class="call-us f-block">
+                            <div class="icon">
+                                <span class="lni lni lni-headphone-alt"></span>
+                            </div>
+                            <div class="info">
+                                <div class="info-head">@T("Footer.Phone.Title")</div>
+                                <div class="info-bottom">@Model.CompanyPhone</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-7 d-flex flex-column align-items-end px-2">
+                        <h6>@T("Footer.AboutUs")</h6>
+                        <ul class="d-inline-flex jutify-content-end">
+                            <li class="px-2">@Model.CompanyEmail</li>
+                            <li class="px-2">@Model.CompanyAddress</li>
+                            <li class="pl-2 pr-0">@Model.CompanyHours</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-lower small">
+            <div class="row">
+                <div class="col-12 col-md pb-1 pt-1 flex-column text-lg-left text-center copyright">
+                    <span class="footer-disclaimer">@T("Content.CopyrightNotice", DateTime.Now.Year, Model.StoreName)</span>
+                </div>
+                @if (!Model.HidePoweredByGrandNode)
+                {
+                    <div class="col-12 col-md-4  pb-1 pt-1 text-center text-lg-right">
+                        <a class="pr-1 text-success" href="#"></a><span> </span><a href="#"> </a>
+                    </div>
+                }
+            </div>
+        </div>
+        @await Component.InvokeAsync("Widget", new { widgetZone = "after_footerclean" })
+    </div>
+</footer>
+<a href="#" id="back-to-top" title="Back to top">
+    <span class="mdi mdi-chevron-up"></span>
+    <span class="sr-only">back to top</span>
+</a>

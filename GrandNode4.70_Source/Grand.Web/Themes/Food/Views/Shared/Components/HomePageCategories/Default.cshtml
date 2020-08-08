@@ -1,0 +1,121 @@
+﻿@model IList<CategoryModel>
+@inject DisplayOrderHomePage order
+<div class="categoryGrid my-lg-5 pt-0 my-4 text-center order-@order.HomePageCategories">
+    <div class="col-12 px-0">
+
+        <div class="swiper-container lazyload" id="HomeCategories">
+            <div class="custom-loader-container">
+                <div class="loader-5"><span></span></div>
+            </div>
+            <div class="swiper-wrapper">
+                @foreach (var item in Model)
+                {
+                    <div class="swiper-slide">
+                        <div class="card brand" @if (item.GenericAttributes.Any()) { var homePageColor = item.GenericAttributes.FirstOrDefault(x => x.Key == "homePageColor")?.Value; if (!string.IsNullOrEmpty(homePageColor)) { <text> style="color:@homePageColor" </text> } }>
+                            <div class="brand-picture">
+                                <a href="@Url.RouteUrl("Category", new { SeName = item.SeName })" title="@item.PictureModel.Title">
+                                    <picture>
+                                        @*<source media="(max-width: 480px)" picture-id="@item.PictureModel.Id" picture-size="460" />*@
+                                        <img class="img-fluid lazyload swiper-lazy" alt="@item.PictureModel.AlternateText" data-src="@item.PictureModel.ImageUrl" title="@item.PictureModel.Title" />
+                                    </picture>
+                                </a>
+                            </div>
+                            @if (item.GenericAttributes.Any())
+                            {
+                                var showFlag = item.GenericAttributes.FirstOrDefault(x => x.Key == "showFlag")?.Value;
+                                var showBtn = item.GenericAttributes.FirstOrDefault(x => x.Key == "showBtn")?.Value;
+                                @if (showFlag == "true")
+                                {
+                                    <span class="badge @item.FlagStyle">@item.Flag</span>
+                                }
+                                <div class="brand-additionals">
+                                    @{
+                                        var alternativName = item.GenericAttributes.FirstOrDefault(x => x.Key == "alternativName")?.Value;
+                                    }
+                                    @if (!string.IsNullOrEmpty(alternativName))
+                                    {
+
+                                        @Html.Raw(item.Description)
+
+                                    }
+                                    else
+                                    {
+                                        <div class="brand-name">
+                                            <a href="@Url.RouteUrl("Category", new { SeName = item.SeName })">
+                                                @item.Name
+                                            </a>
+                                        </div>
+                                    }
+                                    @if (showBtn == "true")
+                                    {
+                                        <a class="btn btn-category" href="@Url.RouteUrl("Category", new { SeName = item.SeName })">
+                                            <span>@T("foodtheme.featuredcategory.button")</span>
+                                            <span class="lni lni-chevron-right"></span>
+                                        </a>
+                                    }
+
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="brand-additionals">
+                                    <div class="brand-name">
+                                        <a href="@Url.RouteUrl("Category", new { SeName = item.SeName })">
+                                            @item.Name
+                                        </a>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        <script asp-location="Footer">
+                @{
+                    var XlItems = 12 / order.Pc_Xl;
+                    var LgItems = 12 / order.Pc_Lg;
+                    var MdItems = 12 / order.Pc_Md;
+                    var SmItems = 12 / order.Pc_Sm;
+                    var Items = 12 / order.Pc_Col;
+                }
+                $(document).ready(function () {
+                    var HomeCategories = new Swiper('#HomeCategories', {
+                        speed: 400,
+                        autoplay: {
+                            delay: 5000,
+                        },
+                        loop: true,
+                        spaceBetween: 15,
+                        slidesPerView: @XlItems,
+                        breakpoints: {
+                            0: {
+                                spaceBetween: 8,
+                                slidesPerView: @Items
+                            },
+                            // when window width is >= 575px
+                            575: {
+                                spaceBetween: 8,
+                                slidesPerView: @Items
+                            },
+                            // when window width is >= 768px
+                            768: {
+                                spaceBetween: 8,
+                                slidesPerView: @SmItems
+                            },
+                            // when window width is >= 991px
+                            991: {
+                                spaceBetween: 8,
+                                slidesPerView: @MdItems
+                            },
+                            // when window width is >= 1199px
+                            1199: {
+                                spaceBetween: 15,
+                                slidesPerView: @LgItems
+                            }
+                        }
+                    });
+                });
+        </script>
+    </div>
+</div>

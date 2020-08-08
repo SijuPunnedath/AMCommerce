@@ -1,0 +1,127 @@
+﻿@model Grand.Plugin.Widgets.SwiperSlider.Models.ConfigurationModel
+
+
+<div class="form-horizontal">
+    <div class="form-body">
+        <div class="form-group">
+            @*<nop-override-store-checkbox asp-for="showNavigation_OverrideForStore" asp-input="showNavigation" asp-store-scope="@Model.ActiveStoreScopeConfiguration" />*@
+            <admin-label asp-for="showNavigation" />
+            <div class="col-md-9 col-sm-9">
+                <admin-input asp-for="showNavigation" />
+                <span asp-validation-for="showNavigation"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @*<nop-override-store-checkbox asp-for="showPagination_OverrideForStore" asp-input="showPagination" asp-store-scope="@Model.ActiveStoreScopeConfiguration" />*@
+            <admin-label asp-for="showPagination" />
+            <div class="col-md-9 col-sm-9">
+                <admin-input asp-for="showPagination" />
+                <span asp-validation-for="showPagination"></span>
+            </div>
+        </div>
+        <div class="showPagination">
+            <div class="form-group">
+                @*<nop-override-store-checkbox asp-for="paginationType_OverrideForStore" asp-input="paginationType" asp-store-scope="@Model.ActiveStoreScopeConfiguration" />*@
+                <admin-label asp-for="paginationType" />
+                <div class="col-md-9 col-sm-9">
+                    <admin-select asp-for="paginationType" asp-items="Model.PaginationTypes" />
+                    <span asp-validation-for="showPagination"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @*<nop-override-store-checkbox asp-for="autoPlay_OverrideForStore" asp-input="autoPlay" asp-store-scope="@Model.ActiveStoreScopeConfiguration" />*@
+            <admin-label asp-for="autoPlay" />
+            <div class="col-md-9 col-sm-9">
+                <admin-input asp-for="autoPlay" />
+                <span asp-validation-for="autoPlay"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @*<nop-override-store-checkbox asp-for="speed_OverrideForStore" asp-input="speed" asp-store-scope="@Model.ActiveStoreScopeConfiguration" />*@
+            <admin-label asp-for="speed" />
+            <div class="col-md-9 col-sm-9">
+                <admin-input asp-for="speed" asp-postfix="ms" />
+                <span asp-validation-for="speed"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @*<nop-override-store-checkbox asp-for="slidesPerView_OverrideForStore" asp-input="slidesPerView" asp-store-scope="@Model.ActiveStoreScopeConfiguration" />*@
+            <admin-label asp-for="slidesPerView" />
+            <div class="col-md-9 col-sm-9">
+                <admin-input asp-for="slidesPerView" />
+                <span asp-validation-for="slidesPerView"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @*<nop-override-store-checkbox asp-for="spaceBetween_OverrideForStore" asp-input="spaceBetween" asp-store-scope="@Model.ActiveStoreScopeConfiguration" />*@
+            <admin-label asp-for="spaceBetween" />
+            <div class="col-md-9 col-sm-9">
+                <admin-input asp-for="spaceBetween" asp-postfix="px" />
+                <span asp-validation-for="spaceBetween"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @*<nop-override-store-checkbox asp-for="usecountdown_OverrideForStore" asp-input="usecountdown" asp-store-scope="@Model.ActiveStoreScopeConfiguration" />*@
+            <admin-label asp-for="usecountdown" />
+            <div class="col-md-9 col-sm-9">
+                <admin-input asp-for="usecountdown" />
+                <span asp-validation-for="usecountdown"></span>
+            </div>
+        </div>
+        <div class="usecountdown">
+            <div class="form-group">
+                @*<nop-override-store-checkbox asp-for="countdown_OverrideForStore" asp-input="countdown" asp-store-scope="@Model.ActiveStoreScopeConfiguration" />*@
+                <admin-label asp-for="countdown" />
+                <div class="col-md-9 col-sm-9">
+                    <admin-select asp-for="countdown" asp-items="Model.CountDownTypes" />
+                    <span asp-validation-for="countdown"></span>
+                </div>
+            </div>
+        </div>
+        
+
+        <div class="form-group">
+            @*<nop-override-store-checkbox asp-for="loop_OverrideForStore" asp-input="loop" asp-store-scope="@Model.ActiveStoreScopeConfiguration" />*@
+            <admin-label asp-for="loop" />
+            <div class="col-md-9 col-sm-9">
+                <admin-input asp-for="loop" />
+                <span asp-validation-for="loop"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @*<nop-override-store-checkbox asp-for="lazyLoading_OverrideForStore" asp-input="lazyLoading" asp-store-scope="@Model.ActiveStoreScopeConfiguration" />*@
+            <admin-label asp-for="lazyLoading" />
+            <div class="col-md-9 col-sm-9">
+                <admin-input asp-for="lazyLoading" />
+                <span asp-validation-for="lazyLoading"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @*<nop-override-store-checkbox asp-for="preLoadImages_OverrideForStore" asp-input="preLoadImages" asp-store-scope="@Model.ActiveStoreScopeConfiguration" />*@
+            <admin-label asp-for="preLoadImages" />
+            <div class="col-md-9 col-sm-9">
+                <admin-input asp-for="preLoadImages" />
+                <span asp-validation-for="preLoadImages"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @*<nop-override-store-checkbox asp-for="setMinHeight_OverrideForStore" asp-input="setMinHeight" asp-store-scope="@Model.ActiveStoreScopeConfiguration" />*@
+            <admin-label asp-for="setMinHeight" />
+            <div class="col-md-9 col-sm-9">
+                <admin-input asp-for="setMinHeight" />
+                <span asp-validation-for="setMinHeight"></span>
+            </div>
+        </div>
+    </div>
+
+</div>

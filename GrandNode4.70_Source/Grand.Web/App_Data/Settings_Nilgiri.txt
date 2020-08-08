@@ -1,0 +1,2 @@
+DataProvider: mongodb
+DataConnectionString: mongodb://siju:abc123@localhost:27017/GrandNode?authSource=Assets&readPreference=primary&appname=MongoDB%20Compass&ssl=false

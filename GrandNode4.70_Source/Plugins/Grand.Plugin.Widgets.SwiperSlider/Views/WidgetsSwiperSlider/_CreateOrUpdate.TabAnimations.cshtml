@@ -1,0 +1,76 @@
+﻿@model Grand.Plugin.Widgets.SwiperSlider.Models.SlideConfigurationModel
+
+<div class="form-horizontal">
+    <div class="form-body">
+        <div class="animation-delay-slides">
+            <div class="panel-group">
+                <div class="panel panel-default">
+                    <div class="panel-heading">@T("grand.widget.swiperslider.animations.header")</div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <admin-label asp-for="HeaderAnimation" />
+                            <div class="col-md-9 col-sm-9">
+                                <admin-select asp-for="HeaderAnimation" asp-items="Model.AnimationTypes" />
+                                <span asp-validation-for="HeaderAnimation"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <admin-label asp-for="HeaderAnimationDelay" />
+                            <div class="col-md-9 col-sm-9">
+                                <admin-select asp-for="HeaderAnimationDelay" asp-items="Model.AnimationDelays" asp-postfix="s" />
+                                <span asp-validation-for="HeaderAnimationDelay"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="panel-group">
+                <div class="panel panel-default">
+                    <div class="panel-heading">@T("grand.widget.swiperslider.animations.body")</div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <admin-label asp-for="BodyAnimation" />
+                            <div class="col-md-9 col-sm-9">
+                                <admin-select asp-for="BodyAnimation" asp-items="Model.AnimationTypes" />
+                                <span asp-validation-for="BodyAnimation"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <admin-label asp-for="BodyAnimationDelay" />
+                            <div class="col-md-9 col-sm-9">
+                                <admin-select asp-for="BodyAnimationDelay" asp-items="Model.AnimationDelays" asp-postfix="s" />
+                                <span asp-validation-for="BodyAnimationDelay"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="panel-group">
+                <div class="panel panel-default">
+                    <div class="panel-heading">@T("grand.widget.swiperslider.animations.footer")</div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <admin-label asp-for="FooterAnimation" />
+                            <div class="col-md-9 col-sm-9">
+                                <admin-select asp-for="FooterAnimation" asp-items="Model.AnimationTypes" />
+                                <span asp-validation-for="FooterAnimation"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <admin-label asp-for="FooterAnimationDelay" />
+                            <div class="col-md-9 col-sm-9">
+                                <admin-select asp-for="FooterAnimationDelay" asp-items="Model.AnimationDelays" asp-postfix="s" />
+                                <span asp-validation-for="FooterAnimationDelay"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

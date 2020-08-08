@@ -1,0 +1,22 @@
+﻿@model IList<ProductOverviewModel>
+@{
+    Layout = "_ColumnsTwo";
+
+    //title
+    Html.AddTitleParts(T("PageTitle.RecentlyViewedProducts").Text);
+}
+@using Grand.Web.Models.Catalog;
+<div class="page recently-viewed-products-page product-grid col-12 px-0">
+    <h2 class="generalTitle">@T("Products.RecentlyViewedProducts")</h2>
+    @if (Model.Any())
+    {
+        <div class="row flex-grid">
+            @foreach (var product in Model)
+            {
+                <div class="col-xl-3 col-lg-4 col-sm-6 col-6 product-container pb-3">
+                    <partial name="_ProductBox" model="product" />
+                </div>
+            }
+        </div>
+    }
+</div>

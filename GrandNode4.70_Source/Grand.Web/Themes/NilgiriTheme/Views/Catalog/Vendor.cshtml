@@ -1,0 +1,201 @@
+﻿@model VendorModel
+@inject SeoSettings seoSettings
+@{
+    Layout = "_ColumnsTwoFull";
+    Html.AddTitleParts(!String.IsNullOrEmpty(Model.MetaTitle) ? Model.MetaTitle : Model.Name);
+    Html.AddMetaDescriptionParts(Model.MetaDescription);
+    Html.AddMetaKeywordParts(Model.MetaKeywords);
+
+    var canonicalUrlsEnabled = seoSettings.CanonicalUrlsEnabled;
+    if (canonicalUrlsEnabled)
+    {
+        var vendorUrl = Url.RouteUrl("Vendor", new { SeName = Model.SeName }, this.Url.ActionContext.HttpContext.Request.Scheme);
+        Html.AddCanonicalUrlParts(vendorUrl);
+    }
+}
+@section Breadcrumb {
+    <div class="catalog-top h-auto py-3">
+            <div class="container-fluid">
+                <div class="top-container vendor-container">
+                    <div class="vendor-info-container">
+                        <div class="picture-container">
+                            <img class="img-fluid" alt="@Model.PictureModel.AlternateText" src="@Model.PictureModel.ImageUrl" title="@Model.PictureModel.Title" />
+                        </div>
+                        <div class="info">
+                            <div class="top">
+                                <div class="name-reviews w-100">
+                                    <div class="name"><h2>@Model.Name</h2></div>
+                                    @*review*@
+                                    @if (Model.VendorReviewOverview.AllowCustomerReviews)
+                                    {
+                                        <div>
+                                            <partial name="_VendorReviewOverview" model="Model.VendorReviewOverview" />
+                                        </div>
+                                    }
+                                </div>
+                                @if (Model.Address != null)
+                                {
+                                    <div class="address-info w-100">
+
+                                        <ul>
+                                            @if (Model.Address.CompanyEnabled && !String.IsNullOrEmpty(Model.Address.Company))
+                                            {
+                                                <li class="company">
+                                                    <span class="lni lni-network"></span>
+                                                    @Model.Address.Company
+                                                </li>
+                                            }
+                                            <li>
+                                                @if (Model.Address.StreetAddressEnabled && !String.IsNullOrEmpty(Model.Address.Address1))
+                                                {
+                                                    <span class="lni lni-map-marker"></span>
+                                                    <div class="address1">
+                                                        @Model.Address.Address1
+                                                    </div>
+                                                }
+                                                @if (Model.Address.StreetAddress2Enabled && !String.IsNullOrEmpty(Model.Address.Address2))
+                                                {
+                                                    <div class="address2 ml-2">
+                                                        @Model.Address.Address2
+                                                    </div>
+                                                }
+                                                @if (Model.Address.CityEnabled || Model.Address.StateProvinceEnabled || Model.Address.ZipPostalCodeEnabled)
+                                                {
+                                                    var cityStateZip = "";
+                                                    if (Model.Address.CityEnabled && !String.IsNullOrEmpty(Model.Address.City))
+                                                    {
+                                                        cityStateZip = Model.Address.City;
+                                                        if (Model.Address.StateProvinceEnabled || Model.Address.ZipPostalCodeEnabled)
+                                                        {
+                                                            cityStateZip += ",";
+                                                        }
+                                                    }
+                                                    if (Model.Address.StateProvinceEnabled)
+                                                    {
+                                                        if (!String.IsNullOrEmpty(cityStateZip))
+                                                        {
+                                                            cityStateZip += " ";
+                                                        }
+                                                        cityStateZip += Model.Address.StateProvinceName;
+                                                    }
+                                                    if (Model.Address.ZipPostalCodeEnabled)
+                                                    {
+                                                        if (!String.IsNullOrEmpty(cityStateZip))
+                                                        {
+                                                            cityStateZip += " ";
+                                                        }
+                                                        cityStateZip += Model.Address.ZipPostalCode;
+                                                    }
+                                                    if (!String.IsNullOrEmpty(cityStateZip))
+                                                    {
+                                                        <div class="city-state-zip ml-2">
+                                                            @cityStateZip
+                                                        </div>
+                                                    }
+                                                }
+                                                @if (Model.Address.CountryEnabled && !String.IsNullOrEmpty(Model.Address.CountryName))
+                                                {
+                                                    <div class="country ml-2">
+                                                        @Model.Address.CountryName
+                                                    </div>
+                                                }
+                                            </li>
+                                            @if (Model.Address.PhoneEnabled && !String.IsNullOrEmpty(Model.Address.PhoneNumber))
+                                            {
+                                                <li class="phone">
+                                                    <span class="lni lni-headphone-alt"></span>
+                                                    @Model.Address.PhoneNumber
+                                                </li>
+                                            }
+                                            @if (Model.Address.FaxEnabled && !String.IsNullOrEmpty(Model.Address.FaxNumber))
+                                            {
+                                                <li class="fax">
+                                                    <span class="lni lni-ticket-alt"></span>
+                                                    @Model.Address.FaxNumber
+                                                </li>
+                                            }
+                                        </ul>
+                                    </div>
+                                }
+                                </div>
+                            @if (Model.AllowCustomersToContactVendors)
+                            {
+                                <button class="btn btn-info contact-vendor-button mt-3" onclick="setLocation('@Url.RouteUrl("ContactVendor", new { vendorId = Model.Id })')">
+                                    @T("ContactVendor")
+                                </button>
+                            }
+                            <div class="bottom">
+                                @if (!String.IsNullOrWhiteSpace(Model.Description))
+                                {
+                                    <article class="text-xs-center generalMarginSupporter vendor-description">
+                                        @Html.Raw(Model.Description)
+                                    </article>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+    @if (Model.Products.Any())
+    {
+        @await Component.InvokeAsync("Widget", new { widgetZone = "categorydetails_before_filters", additionalData = Model.Id })
+        <div class="catalog-under-top">
+            <partial name="_CatalogSelectorsFull" model="Model.PagingFilteringContext" />
+        </div>
+    }
+}
+<div class="page vendor-page">
+    @*product list*@
+    @if (Model.Products.Any())
+    {
+        if (Model.PagingFilteringContext.ViewMode == "grid")
+        {
+            <div class="product-grid col-12 px-0">
+                <div class="row flex-grid">
+                    @foreach (var product in Model.Products)
+                    {
+                        <div class="col-xxl-2 col-xl-3 col-lg-4 col-sm-6 col-6 product-container mb-2">
+                            <partial name="_ProductBox" model="product" />
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="product-grid col-12">
+                <div class="row">
+                    @foreach (var product in Model.Products)
+                    {
+                        <partial name="_ProductBoxList" model="product" />
+                    }
+                </div>
+            </div>
+        }
+    }
+</div>
+@{
+    var pager = Html.Pager(Model.PagingFilteringContext).QueryParam("pagenumber");
+}
+@if (!pager.IsEmpty())
+{
+    <div class="pager">
+        @pager
+    </div>
+}
+@await Component.InvokeAsync("Widget", new { widgetZone = "vendordetails_bottom", additionalData = Model.Id })
+
+@section filters
+{
+    @*filtering*@
+    @if (Model.PagingFilteringContext.PriceRangeFilter.Enabled)
+    {
+        <partial name="_FilterPriceBox" model="Model.PagingFilteringContext.PriceRangeFilter" />
+    }
+    @*filtering*@
+    @if (Model.PagingFilteringContext.SpecificationFilter.Enabled)
+    {
+        <partial name="_FilterSpecsBox" model="Model.PagingFilteringContext.SpecificationFilter" />
+    }
+}

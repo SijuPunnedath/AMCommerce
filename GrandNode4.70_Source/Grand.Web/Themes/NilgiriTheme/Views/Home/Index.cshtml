@@ -1,0 +1,77 @@
+﻿@{
+    Layout = "_ColumnsOneHome";
+}
+@await Component.InvokeAsync("Widget", new { widgetZone = "home_page_top" })
+<div class="page home-page custom-container d-flex flex-column mt-0 py-lg-4 py-0">
+    <div class="container-fluid">
+        @await Component.InvokeAsync("PushNotificationsRegistration")
+        @*@await Component.InvokeAsync("TopicBlock", new { systemName = "HomePageText" })*@
+        @await Component.InvokeAsync("Widget", new { widgetZone = "home_page_before_products" })
+        <div class="col-12 px-0">
+            <div class="row">
+                @await Component.InvokeAsync("RecommendedProducts")
+                <div class="col-xl-9 col-lg-8 col-12 mt-0 px-lg-0 px-3 order-lg-1 order-0">
+                    <ul class="nav nav-pills custom-pills justify-content-lg-start mb-sm-3 mb-0" id="pills-tab" role="tablist">
+                        <li class="nav-item d-none">
+                            <a class="nav-link" id="pills-homefeaturedproducts-tab" data-toggle="pill" href="#pills-homefeaturedproducts" role="tab" aria-controls="pills-homefeaturedproducts" aria-selected="true"><span>@T("HomePage.Products")</span></a>
+                        </li>
+                        <li class="nav-item d-none">
+                            <a class="nav-link" id="pills-homenewproducts-tab" data-toggle="pill" href="#pills-homenewproducts" role="tab" aria-controls="pills-homenewproducts" aria-selected="false"><span>@T("HomePage.NewProducts")</span></a>
+                        </li>
+                        <li class="nav-item d-none">
+                            <a class="nav-link" id="pills-homepersonalproducts-tab" data-toggle="pill" href="#pills-homepersonalproducts" role="tab" aria-controls="pills-homepersonalproducts" aria-selected="false"><span>@T("HomePage.Personalized.Products")</span></a>
+                        </li>
+                        <li class="nav-item d-none">
+                            <a class="nav-link" id="pills-homesuggestedproducts-tab" data-toggle="pill" href="#pills-homesuggestedproducts" role="tab" aria-controls="pills-homesuggestedproducts" aria-selected="false"><span>@T("HomePage.Suggested.Products")</span></a>
+                        </li>
+                    </ul>
+                    <div class="tab-controls">
+                        <div class="prev">
+                            <span class="lni lni-chevron-left"></span>
+                        </div>
+                        <div class="next">
+                            <span class="lni lni-chevron-right"></span>
+                        </div>
+                    </div>
+                    <div class="tab-content custom-tabs" id="pills-tabContent">
+                        <div class="tab-pane fade show active" id="pills-homefeaturedproducts" role="tabpanel" aria-labelledby="pills-homefeaturedproducts-tab">
+                            @await Component.InvokeAsync("HomePageProducts")
+                        </div>
+                        <div class="tab-pane fade" id="pills-homenewproducts" role="tabpanel" aria-labelledby="pills-homenewproducts-tab">
+                            @await Component.InvokeAsync("HomePageNewProducts")
+                        </div>
+                        <div class="tab-pane fade" id="pills-homepersonalproducts" role="tabpanel" aria-labelledby="pills-homepersonalproducts-tab">
+                            @await Component.InvokeAsync("PersonalizedProducts")
+                        </div>
+                        <div class="tab-pane fade" id="pills-homesuggestedproducts" role="tabpanel" aria-labelledby="pills-homesuggestedproducts-tab">
+                            @await Component.InvokeAsync("SuggestedProducts")
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 px-0">
+        @await Component.InvokeAsync("Widget", new { widgetZone = "home_page_before_best_sellers" })
+        @await Component.InvokeAsync("HomePageBestSellers")
+    </div>
+    <div class="container-fluid">
+        @await Component.InvokeAsync("Widget", new { widgetZone = "home_page_before_categories" })
+        @await Component.InvokeAsync("HomePageCategories")
+    </div>
+    @await Component.InvokeAsync("TopicBlock", new { systemName = "DealsOfTheDay" })
+    <div class="container-fluid">
+        @await Component.InvokeAsync("CategoryFeaturedProducts")
+        @await Component.InvokeAsync("ManufacturerFeaturedProducts")
+        @await Component.InvokeAsync("Widget", new { widgetZone = "home_page_before_news" })
+        @await Component.InvokeAsync("HomePageNews")
+        @await Component.InvokeAsync("Widget", new { widgetZone = "home_page_before_blog" })
+        @await Component.InvokeAsync("HomePageBlog")
+        @await Component.InvokeAsync("HomePagePolls")
+        @await Component.InvokeAsync("Widget", new { widgetZone = "home_page_bottom" })
+        @await Component.InvokeAsync("Widget", new { widgetZone = "home_page_before_manufacturers" })
+        @await Component.InvokeAsync("HomePageManufacturers")
+        @await Component.InvokeAsync("Widget", new { widgetZone = "home_page_before_poll" })
+    </div>
+</div>
+

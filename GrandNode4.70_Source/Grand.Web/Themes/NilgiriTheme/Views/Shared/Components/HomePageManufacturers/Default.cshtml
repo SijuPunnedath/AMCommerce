@@ -1,0 +1,21 @@
+﻿@model IList<ManufacturerModel>
+@inject DisplayOrderHomePage order
+<div class="manufacturerGrid text-center order-@order.HomePageManufacturers">
+    <div id="HomePageManufacturers" class="swiper-container">
+        <div class="swiper-wrapper">
+            @foreach (var item in Model)
+            {
+                <div class="swiper-slide">
+                    <div class="manufacturer-box">
+                        <a href="@Url.RouteUrl("Manufacturer", new { SeName = item.SeName })" title="@item.PictureModel.Title">
+                            <picture>
+                                <source media="(max-width: 480px)" picture-id="@item.PictureModel.Id" picture-size="350" />
+                                <img class="img-fluid lazyload" alt="@item.PictureModel.AlternateText" data-src="@item.PictureModel.ImageUrl" title="@item.PictureModel.Title" />
+                            </picture>
+                        </a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

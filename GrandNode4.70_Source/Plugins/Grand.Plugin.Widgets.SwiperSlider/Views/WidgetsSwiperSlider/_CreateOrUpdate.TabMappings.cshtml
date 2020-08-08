@@ -1,0 +1,24 @@
+﻿@model Grand.Plugin.Widgets.SwiperSlider.Models.SlideConfigurationModel
+
+<div class="form-horizontal">
+    <div class="form-body">
+        <div class="form-group">
+            <admin-label asp-for="ApplyForHomepage" />
+            <div class="col-md-9 col-sm-9">
+                <admin-input asp-for="ApplyForHomepage" />
+            </div>
+        </div>
+        <div class="form-group">
+            <admin-label asp-for="CategoryId" />
+            <div class="col-md-9 col-sm-9">
+                <admin-select asp-for="CategoryId" asp-items="Model.CategoryIds" />
+            </div>
+        </div>
+        <div class="form-group">
+            <admin-label asp-for="ManufacturerId" />
+            <div class="col-md-9 col-sm-9">
+                <admin-select asp-for="ManufacturerId" asp-items="Model.ManufacturerIds" />
+            </div>
+        </div>
+    </div>
+</div>

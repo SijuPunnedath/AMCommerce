@@ -1,0 +1,73 @@
+﻿@model Grand.Plugin.Widgets.AjaxFilters.Models.FilterSpecificationsModel
+@using Grand.Plugin.Widgets.AjaxFilters
+
+@if (Model.SpecificationAttributes != null && Model.SpecificationAttributes.Count > 0)
+{
+    <div id="specification-filter-section">
+        <div class="specification-section">
+            @{ int j = 0; }
+            @foreach (var specificationFilterGroup in Model.SpecificationAttributes)
+            {
+                <div class="filter-section s-@(specificationFilterGroup.Id)" data-id="@(specificationFilterGroup.Id)">
+                    <div class="title">
+                        <span class="ajaxfilter-title" style="float:left">@specificationFilterGroup.Name</span>
+                        <span class="arrowHold"></span>
+                    </div>
+                    <div class="ajaxfilter-section">
+                        <input type="hidden" name="specyficationModel][SpecificationAttributes][@j][Name" value="@(specificationFilterGroup.Name)">
+                        <input type="hidden" name="specyficationModel][SpecificationAttributes][@j][Id" value="@(specificationFilterGroup.Id)">
+                        @if (Model.CheckOrDropdowns == AjaxFiltersUI.UseCheckboxes)
+                        {
+                            <ul>
+                                @for (int i = 0; i < specificationFilterGroup.SpecificationAttributeOptions.OrderBy(spo => spo.Name).Count(); i++)
+                                {
+                                    var specificationFilterItem = specificationFilterGroup.SpecificationAttributeOptions.OrderBy(pva => pva.Name).ElementAt(i);
+                                    string color = "";
+
+
+                                    if (!String.IsNullOrEmpty(specificationFilterItem.ColorSquaresRgb))
+                                    {
+                                        <li class="square @(specificationFilterItem.CheckedState == CheckedState.Checked ? "active" : "") @specificationFilterItem.Id" style="background-color: @specificationFilterItem.ColorSquaresRgb" id="square_specyficationModel_SpecificationAttributes_@(specificationFilterGroup.Id)_@(i)_Id"></li>
+                                        color = "regular-checkbox";
+                                    }
+                                    else
+                                    {
+                                        <li class="square @(specificationFilterItem.CheckedState == CheckedState.Checked ? "active" : "") @specificationFilterItem.Id" id="square_specyficationModel_SpecificationAttributes_@(specificationFilterGroup.Id)_@(i)_Id"></li>
+                                    }
+
+                                    <li data-id="@specificationFilterItem.Id">
+
+                                        <input class="@specificationFilterItem.Id @color" type="checkbox" name="specyficationModel][SpecificationAttributes][@j][SpecificationAttributeOptions][@i][Id" onchange="listenToCheckBox(this, '@specificationFilterItem.Id', '@specificationFilterItem.Name.Replace("'", "").Replace("/", " ")'), resetFilters()" value="@specificationFilterItem.Id" id="specyficationModel_SpecificationAttributes_@(specificationFilterGroup.Id)_@(i)_Id"
+                                               @(specificationFilterItem.CheckedState == CheckedState.Checked ? "Checked" : "")
+                                               @(specificationFilterItem.CheckedState == CheckedState.Disabled ? "Disabled" : "")
+                                               @(specificationFilterItem.CheckedState == CheckedState.CheckedDisabled ? "Disabled Checked" : "")
+                                               onclick="AjaxFilter.setFilter('s-@(specificationFilterGroup.Id)')" />
+                                        <input type="hidden" name="specyficationModel][SpecificationAttributes][@j][SpecificationAttributeOptions][@i][Id" value=@(specificationFilterItem.CheckedState == CheckedState.CheckedDisabled ? specificationFilterItem.Id.ToString() : "")>
+                                        <input type="hidden" name="specyficationModel][SpecificationAttributes][@j][SpecificationAttributeOptions][@i][Count" value="@specificationFilterItem.Count">
+                                        <label for="specyficationModel_SpecificationAttributes_@(specificationFilterGroup.Id)_@(i)_Id">@specificationFilterItem.Name <span>(@specificationFilterItem.Count)</span></label>
+                                        <input type="hidden" name="specyficationModel][SpecificationAttributes][@j][SpecificationAttributeOptions][@i][Name" value="@(specificationFilterItem.Name)">
+                                    </li>
+                                }
+                            </ul>
+                        }
+                        else if (Model.CheckOrDropdowns == AjaxFiltersUI.UseDropdowns)
+                        {
+                            <select name="specyficationModel][SpecificationAttributes][@j][SpecificationAttributeOptions][0][Id" id="specyficationModel_SpecificationAttributes_@(j)_Id" onchange="AjaxFilter.setFilter('s-@(specificationFilterGroup.Id)'), listenToSelect('specyficationModel_SpecificationAttributes_@(j)_Id')">
+                                <option value="" selected="selected">@(specificationFilterGroup.SpecificationAttributeOptions.Where(x => x.CheckedState != CheckedState.Disabled).Count() > 0 ? T("Plugin.Widgets.AjaxFilters.Filter.All") : T("Plugin.Widgets.AjaxFilters.Filter.Empty"))</option>
+                                @foreach (var specificationFilterItem in specificationFilterGroup.SpecificationAttributeOptions.Where(x => x.CheckedState != CheckedState.Disabled).OrderBy(pva => pva.Name))
+                                {
+                                    var selected = specificationFilterItem.CheckedState == CheckedState.Checked || specificationFilterItem.CheckedState == CheckedState.CheckedDisabled;
+                                    <option value="@specificationFilterItem.Id" selected="@selected">@specificationFilterItem.Name</option>
+                                }
+                            </select>
+
+                        }
+                    </div>
+                </div>
+                j++;
+            }
+        </div>
+    </div>
+}
+
+

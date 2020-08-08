@@ -1,0 +1,186 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Copyright>Copyright © UNIT-SOFT Sp. z o.o.</Copyright>
+    <Company>UNIT-SOFT Sp. z o.o.</Company>
+    <Authors>UNIT-SOFT Sp. z o.o.</Authors>
+    <PackageProjectUrl>https://grandnode.com/</PackageProjectUrl>
+    <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
+    <ServerGarbageCollection>false</ServerGarbageCollection>
+    <PreserveCompilationReferences>true</PreserveCompilationReferences>    
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Grand.Api\Grand.Api.csproj" />
+    <ProjectReference Include="..\Grand.Core\Grand.Core.csproj" />
+    <ProjectReference Include="..\Grand.Framework\Grand.Framework.csproj" />
+    <ProjectReference Include="..\Grand.Services\Grand.Services.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.4" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Data\**" CopyToPublishDirectory="PreserveNewest" Exclude="App_Data\appsettings.json;App_Data\DataProtectionKeys\*.xml;App_Data\InstalledPlugins.txt" />
+    <Content Include="Themes\**" CopyToPublishDirectory="PreserveNewest" Exclude="Themes\**\*.config;Themes\**\*.cshtml" />
+    <Content Include="Roslyn\**" CopyToPublishDirectory="PreserveNewest" Exclude="Roslyn\**\*.dll" />
+    <Content Include="logs\**" CopyToPublishDirectory="PreserveNewest" />
+    <Content Remove="wwwroot\content\images\thumbs\*.jpeg;wwwroot\content\images\thumbs\*.jpg;wwwroot\content\images\thumbs\*.png" />
+    <Content Remove="wwwroot\bundles\*.css;wwwroot\bundles\*.js" />
+  </ItemGroup>
+  <Target Name="PublishViews" BeforeTargets="PrepareForPublish">
+    <ItemGroup>
+      <ThemeViews Include="Themes/**/*" />
+      <PluginFiles Include="Plugins/**/*" />
+    </ItemGroup>
+    <Copy SourceFiles="@(ThemeViews)" DestinationFolder="$(PublishDir)/Themes/%(RecursiveDir)" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="@(PluginFiles)" DestinationFolder="$(PublishDir)/Plugins/%(RecursiveDir)" SkipUnchangedFiles="true" />
+  </Target>
+  <ItemGroup>
+    <Content Remove="Plugins\**" />
+    <Compile Remove="Plugins\**" />
+    <EmbeddedResource Remove="Plugins\**" />
+    <None Remove="Plugins\**" />
+    <None Remove="App_Data\Settings.txt" />
+    <None Remove="App_Data\Settings_Nilgiri.txt" />
+    <Content Update="Plugins\**">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Themes\NilgiriTheme\Views\Blog\BlogPost.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Blog\Components\BlogCategories\Default.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Blog\Components\BlogMonths\Default.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Blog\Components\BlogTags\Default.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Blog\List.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Boards\Search.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Boards\_ForumGroup.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Boards\_ForumPost.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Catalog\CategoryTemplate.ProductsInGridOrLines.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Catalog\CategoryTemplate.ProductsInGridOrLinesFull.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Catalog\CategoryTemplate.ProductsInGridOrLinesRight.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Catalog\Search.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Catalog\Vendor.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Catalog\_CatalogSelectors.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Catalog\_CatalogSelectorsFull.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Catalog\_VendorReviewOverview.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Checkout\BillingAddress.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Checkout\Completed.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Checkout\Confirm.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Checkout\OnePageCheckout.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Checkout\OpcConfirmOrder.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Checkout\PaymentInfo.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Checkout\PaymentMethod.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Checkout\ShippingAddress.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Checkout\ShippingMethod.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Common\ContactUs.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Common\PageNotFound.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Customer\Auctions.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Customer\Info.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Customer\PasswordRecovery.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Customer\PasswordRecoveryConfirm.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Customer\Register.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Customer\TwoFactorAuthorization.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Home\Index.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\News\List.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\News\NewsItem.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\PrivateMessages\Index.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\PrivateMessages\SendPM.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\PrivateMessages\ViewPM.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Product\CompareProducts.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Product\NewProducts.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Product\ProductTemplate.Grouped.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Product\ProductTemplate.Scroll.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Product\ProductTemplate.Scroll.QuickView.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Product\ProductTemplate.Simple.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Product\ProductTemplate.Simple.QuickView.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Product\RecentlyViewedProducts.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Product\_AddToCart.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Product\_AddToWishlist.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Product\_AskQuestionOnProduct.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Product\_AuctionInfo.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Product\_CompareProductsButton.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Product\_ProductAskQuestionButton.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Product\_ProductAttributes.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Product\_ProductBreadcrumb.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Product\_ProductDetailsPictures.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Product\_ProductDetailsPicturesQV.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Product\_ProductEmailAFriendButton.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Product\_ProductPrice.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Shared\Components\AdminHeaderLinks\Default.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Shared\Components\CategoryFeaturedProducts\Default.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Shared\Components\CategoryNavigation\Default.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Shared\Components\CheckoutProgress\Default.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Shared\Components\CrossSellProducts\Default.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Shared\Components\CurrencySelector\Default.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Shared\Components\CustomerNavigation\Default.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Shared\Components\FlyoutShoppingCart\Default.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Shared\Components\FooterClean\Default.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Shared\Components\Footer\Default.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Shared\Components\HeaderLinks\Default.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Shared\Components\HomePageBestSellers\Default.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Shared\Components\HomePageBlog\Default.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Shared\Components\HomePageCategories\Default.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Shared\Components\HomePageManufacturers\Default.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Shared\Components\HomePageNewProducts\Default.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Shared\Components\HomePageNews\Default.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Shared\Components\HomePageProducts\Default.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Shared\Components\LanguageSelector\Default.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Shared\Components\Logo\Default.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Shared\Components\ManufacturerFeaturedProducts\Default.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Shared\Components\ManufacturerNavigation\Default.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Shared\Components\NewsletterBox\Default.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Shared\Components\OrderSummary\Default.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Shared\Components\OrderTotals\Default.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Shared\Components\PersonalizedProducts\Default.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Shared\Components\PopularProductTags\Default.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Shared\Components\PrivateMessagesInbox\Default.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Shared\Components\PrivateMessagesSentItems\Default.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Shared\Components\ProductsAlsoPurchased\Default.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Shared\Components\RecentlyViewedProductsBlock\Default.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Shared\Components\RecommendedProducts\Default.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Shared\Components\RelatedProducts\Default.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Shared\Components\SearchBox\Default.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Shared\Components\ShoppingCartLinks\Default.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Shared\Components\SimilarProducts\Default.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Shared\Components\SuggestedProducts\Default.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Shared\Components\TaxTypeSelector\Default.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Shared\Components\TopicBlock\Default.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Shared\Components\TopMenu\Default.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Shared\Components\VendorNavigation\Default.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Shared\Head.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Shared\Header.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Shared\HeaderHome.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Shared\_CategoryLine.TopMenu.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Shared\_ColumnsForms.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Shared\_ColumnsOneHome.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Shared\_ColumnsTwo.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Shared\_ColumnsTwoFull.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Shared\_ColumnsTwoOther.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Shared\_ColumnsTwoRight.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Shared\_DiscountBox.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Shared\_GiftCardBox.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Shared\_Notifications.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Shared\_PopupAddToCart.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Shared\_ProductBox.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Shared\_ProductBoxFeatured.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Shared\_ProductBoxLanding.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Shared\_ProductBoxList.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Shared\_ProductBoxRecommended.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Shared\_ProductBoxRelated.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Shared\_Root.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Shared\_RootCatalog.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Shared\_RootCatalogFull.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Shared\_RootClean.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Shared\_RootForms.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Shared\_RootHome.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\ShoppingCart\Cart.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\ShoppingCart\EmailWishlist.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\ShoppingCart\Wishlist.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Topic\TopicDetails.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Vendor\ApplyVendor.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\Vendor\ContactVendor.cshtml" />
+    <None Include="Themes\NilgiriTheme\Views\_ViewImports.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Themes\NilgiriTheme\Views\Order\" />
+  </ItemGroup>
+</Project>

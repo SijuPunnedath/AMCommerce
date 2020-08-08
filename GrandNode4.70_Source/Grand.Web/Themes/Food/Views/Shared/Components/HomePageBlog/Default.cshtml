@@ -1,0 +1,74 @@
+﻿@model HomePageBlogItemsModel
+@inject DisplayOrderHomePage order
+@if (Model.Items.Any())
+{
+    <div class="blog-list-homepage text-center customGrid my-3 order-@order.HomePageBlog">
+        <h2 class="generalTitle text-center mb-3">
+            @T("Blog.Latest")
+        </h2>
+        <div id="HomePageBlog" class="swiper-container lazyload">
+            <div class="custom-loader-container">
+                <div class="loader-5"><span></span></div>
+            </div>
+            <div class="swiper-wrapper">
+                @foreach (var item in Model.Items)
+                {
+                    @if (item.PictureModel != null && !string.IsNullOrEmpty(item.PictureModel.ImageUrl))
+                    {
+                        <div class="swiper-slide">
+                            <div class="card blog-post with-image">
+                                <div class="img-container">
+                                    <a href="@Url.RouteUrl("BlogPost", new { SeName = item.SeName })">
+                                        <img class="img-fluid lazyload" alt="@item.PictureModel.AlternateText" data-src="@item.PictureModel.ImageUrl" title="@item.PictureModel.Title">
+                                        <span class="post-date">
+                                            <span class="day">@item.CreatedOn.ToString("dd")</span>
+                                            <span class="month">@item.CreatedOn.ToString("MMM")</span>
+                                        </span>
+                                        <h5 class="title">
+                                            <span>@item.Title</span>
+                                        </h5>
+                                    </a>
+                                </div>
+                                <div class="desc-short">
+                                    @Html.Raw(item.Short)
+                                </div>
+                                <div class="button">
+                                    <a class="read-more" href="@Url.RouteUrl("NewsItem", new { SeName = item.SeName })">
+                                        <span class="text">@T("Blog.MoreInfo")</span>
+                                        <span class="icon lni lni lni-more"></span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="swiper-slide">
+                            <div class="card blog-post">
+                                <h5 class="title">
+                                    <a href="@Url.RouteUrl("BlogPost", new { SeName = item.SeName })">@item.Title</a>
+                                </h5>
+                                <span class="post-date">
+                                    <span class="day">@item.CreatedOn.ToString("dd")</span>
+                                    <span class="month">@item.CreatedOn.ToString("MMM")</span>
+                                </span>
+                                <div class="desc-short">
+                                    @Html.Raw(item.Short)
+                                </div>
+                                <div class="button">
+                                    <a class="read-more" href="@Url.RouteUrl("NewsItem", new { SeName = item.SeName })">
+                                        <span class="text">@T("Blog.MoreInfo")</span>
+                                        <span class="icon lni lni lni-more"></span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+        <div class="view-all text-center mt-3">
+            <a class="btn btn-secondary" href="@Url.RouteUrl("Blog")">@T("Blog.ViewAll")</a>
+        </div>
+    </div>
+}

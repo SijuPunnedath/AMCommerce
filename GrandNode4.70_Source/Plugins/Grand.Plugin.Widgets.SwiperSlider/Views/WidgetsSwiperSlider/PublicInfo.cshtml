@@ -1,0 +1,333 @@
+﻿@using Grand.Framework.UI
+@using Grand.Services.Configuration;
+@inject ISettingService _settingService;
+@model Grand.Plugin.Widgets.SwiperSlider.Models.PublicInfoModel
+@{
+    Layout = "";
+    bool isRtl = this.ShouldUseRtlTheme() ? true : false;
+    Html.AddCssFileParts("~/Plugins/Widgets.SwiperSlider/Content/lib/swiper.css");
+    Html.AddCssFileParts("~/Plugins/Widgets.SwiperSlider/Content/lib/animate.css");
+    Html.AddCssFileParts("~/Plugins/Widgets.SwiperSlider/Content/css/swiperSlider.css");
+    Html.AddScriptParts(ResourceLocation.Footer, "~/Plugins/Widgets.SwiperSlider/Content/lib/swiper.js");
+
+    var settings = _settingService.LoadSetting<Grand.Plugin.Widgets.SwiperSlider.WidgetSwiperSliderSettings>();
+
+    var ifloop = settings.loop;
+    var isLoop = "";
+    var minH = "";
+    if (ifloop)
+    {
+        isLoop = "true";
+    }
+    else
+    {
+        isLoop = "false";
+    }
+    if (@settings.setMinHeight > 0)
+    {
+        minH = "style=height:" + @settings.setMinHeight + "px";
+    }
+    else
+    {
+        minH = "style=height:100%";
+    }
+}
+
+<script asp-location="Footer">
+    var mySwiper = new Swiper('#GrandSlider', {
+        // Optional parameters
+        init: false,
+        slidesPerView: @settings.slidesPerView,
+        spaceBetween: @settings.spaceBetween,
+        @if (settings.breakpoints)
+        {
+            <text>
+        breakpoints: {
+                @if(!settings.turnOffExtraSmall) {
+                    <text>
+                    320: {
+                        slidesPerView: @settings.slidesPerViewExtraSmall,
+                        spaceBetween: @settings.spaceBetweenExtraSmall,
+                    },
+                    </text>
+                }
+                @if(!settings.turnOffSmall)
+                {
+                    <text>
+                        640: {
+                            slidesPerView: @settings.slidesPerViewSmall,
+                            spaceBetween: @settings.spaceBetweenSmall,
+                        },
+                    </text>
+                }
+                @if(!settings.turnOffMedium)
+                {
+                    <text>
+                        768: {
+                            slidesPerView: @settings.slidesPerViewMedium,
+                            spaceBetween: @settings.spaceBetweenMedium,
+                        },
+                    </text>
+                }
+                @if(!settings.turnOffLarge)
+                {
+                    <text>
+                        1024: {
+                            slidesPerView: @settings.slidesPerViewLarge,
+                            spaceBetween: @settings.spaceBetweenLarge,
+                        },
+                </text>
+                }
+                @if(!settings.turnOffExtraLarge)
+                {
+                    <text>
+                        1200: {
+                                        slidesPerView: @settings.slidesPerViewExtraLarge,
+                                spaceBetween: @settings.spaceBetweenExtraLarge,
+                            },
+                    </text>
+                }
+            },
+            </text>
+        }
+
+        loop: @isLoop,
+
+        @if(settings.showPagination)
+        {
+            <text>
+            // If we need pagination
+            pagination:
+            {
+                el: '.GrandSlider-pagination.swiper-pagination',
+                clickable: true,
+                type: '@settings.paginationType',
+            },
+            </text>
+        }
+
+        @if(settings.showNavigation)
+        {
+            <text>
+            // Navigation arrows
+            navigation: {
+                nextEl: '.GrandSlider-next',
+                prevEl: '.GrandSlider-prev',
+            },
+            </text>
+        }
+
+        @if(settings.autoPlay)
+        {
+            <text>
+            // speed
+            autoplay: {
+                delay: @settings.speed,
+            },
+            </text>
+        }
+        @if(settings.lazyLoading)
+        {
+            <text>
+            lazy: {
+                loadPrevNext: true,
+            },
+            </text>
+        }
+        @if(settings.preLoadImages)
+        {
+            <text>
+            preloadImages: true,
+            </text>
+        }
+        @if(settings.usecountdown)
+        {
+            <text>
+            scrollbar: {
+                el: '.swiper-scrollbar',
+                draggable: true,
+            },
+            </text>
+        }
+
+        autoResize: true,
+        calculateHeight: true
+    })
+</script>
+
+<div id="GrandSlider" class="swiper-container" @(isRtl ? "dir=\"rtl\"" : "")>
+    <!-- Additional required wrapper -->
+    <div class="swiper-wrapper">
+        <!-- Slides -->
+        @foreach (var slide in Model.Slides)
+        {
+            @if (!string.IsNullOrEmpty(slide.PictureUrl))
+            {
+                if (settings.lazyLoading)
+                {
+                    var hlazy = @slide.PictureHeight + "px";
+                    <div class="swiper-slide swiper-lazy" data-background="@slide.PictureUrl" data-width="@slide.PictureWidth" data-height="@slide.PictureHeight" style="height:@hlazy">
+                        @if (settings.preLoadImages)
+                        {
+                            <div class="swiper-lazy-preloader"></div>
+                        }
+                        <div class="slide-caption @slide.Caption">
+                            <section class="slide-header" data-header="animated @slide.HeaderAnimation delay-@(slide.HeaderAnimationDelay)s">
+                                @Html.Raw(slide.Header)
+                            </section>
+                            <section class="slide-body" data-body="animated @slide.BodyAnimation delay-@(slide.BodyAnimationDelay)s">
+                                @Html.Raw(slide.Body)
+                            </section>
+                            <section class="slide-footer" data-footer="animated @slide.FooterAnimation delay-@(slide.FooterAnimationDelay)s">
+                                @Html.Raw(slide.Footer)
+                            </section>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="swiper-slide">
+                        <img src="@slide.PictureUrl" data-thumb="@slide.PictureUrl" alt="@slide.PictureAlt" title="@slide.PictureTitle" />
+                        <div class="slide-caption @slide.Caption">
+                            <section class="slide-header" data-header="animated @slide.HeaderAnimation delay-@(slide.HeaderAnimationDelay)s">
+                                @Html.Raw(slide.Header)
+                            </section>
+                            <section class="slide-body" data-body="animated @slide.BodyAnimation delay-@(slide.BodyAnimationDelay)s">
+                                @Html.Raw(slide.Body)
+                            </section>
+                            <section class="slide-footer" data-footer="animated @slide.FooterAnimation delay-@(slide.FooterAnimationDelay)s">
+                                @Html.Raw(slide.Footer)
+                            </section>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="swiper-slide" @(Model.Slides.Where(x => string.IsNullOrEmpty(x.PictureUrl)).Count() > 0 ? minH : "")>
+                    <div class="slide-caption @slide.Caption">
+                        <section class="slide-header" data-header="animated @slide.HeaderAnimation delay-@(slide.HeaderAnimationDelay)s">
+                            @Html.Raw(slide.Header)
+                        </section>
+                        <section class="slide-body" data-body="animated @slide.BodyAnimation delay-@(slide.BodyAnimationDelay)s">
+                            @Html.Raw(slide.Body)
+                        </section>
+                        <section class="slide-footer" data-footer="animated @slide.FooterAnimation delay-@(slide.FooterAnimationDelay)s">
+                            @Html.Raw(slide.Footer)
+                        </section>
+                    </div>
+                </div>
+            }
+        }
+        <script asp-location="Footer">
+        function destroySwiper() {
+            if ("@settings.turnOffExtraSmall")
+                    {
+                        if ($(window).width() < 320) {
+                            $('#GrandSlider').hide();
+                        } else {
+                            $('#GrandSlider').show();
+                        }
+                    }
+                    if ("@settings.turnOffSmall")
+                    {
+                        if ($(window).width() < 640) {
+                            $('#GrandSlider').hide();
+                        } else {
+                            $('#GrandSlider').show();
+                        }
+                    }
+                    if ("@settings.turnOffMedium")
+                    {
+                        if ($(window).width() < 768) {
+                            $('#GrandSlider').hide();
+                        } else {
+                            $('#GrandSlider').show();
+                        }
+                    }
+                    if ("@settings.turnOffLarge")
+                    {
+                        if ($(window).width() < 1024) {
+                            $('#GrandSlider').hide();
+                        } else {
+                            $('#GrandSlider').show();
+                        }
+                    }
+                    if ("@settings.turnOffExtraLarge")
+                    {
+                        if ($(window).width() < 1200) {
+                            $('#GrandSlider').hide();
+                        } else {
+                            $('#GrandSlider').show();
+                        }
+                    }
+            }
+            function lazyFix() {
+                $('#GrandSlider .swiper-slide').each(function () {
+                    var oldH = parseInt($(this).data('height'));
+                    var oldW = parseInt($(this).data('width'));
+                    var actualW = parseInt($(this).css('width'));
+                    actualH = (actualW / oldW) * oldH + 'px';
+                    $(this).css('height', actualH);
+                });
+            }
+            $(document).ready(function () {
+                destroySwiper();
+                lazyFix();
+                $(window).resize(function () {
+                    destroySwiper();
+                    lazyFix();
+                });
+                mySwiper.on('init', function () {
+                    var headerClass = $('#GrandSlider .swiper-slide-active .slide-header').data('header'),
+                        bodyClass = $('#GrandSlider .swiper-slide-active .slide-body').data('body'),
+                        footerClass = $('#GrandSlider .swiper-slide-active .slide-footer').data('footer');
+                    $("#GrandSlider .swiper-slide-active .slide-caption").addClass('d-flex');
+                    $("#GrandSlider .swiper-slide-active .slide-header").addClass(headerClass);
+                    $("#GrandSlider .swiper-slide-active .slide-body").addClass(bodyClass);
+                    $("#GrandSlider .swiper-slide-active .slide-footer").addClass(footerClass);
+                    $("#GrandSlider .swiper-scrollbar-drag").addClass('progressAnimation').css('animation-duration', '@settings.speed' + 'ms');
+                });
+                mySwiper.init();
+                mySwiper.on('slideChangeTransitionEnd', function () {
+                    var headerClass = $('#GrandSlider .swiper-slide-active .slide-header').data('header'),
+                        bodyClass = $('#GrandSlider .swiper-slide-active .slide-body').data('body'),
+                        footerClass = $('#GrandSlider .swiper-slide-active .slide-footer').data('footer');
+                    $("#GrandSlider .swiper-slide-active .slide-caption").addClass('d-flex');
+                    $("#GrandSlider .swiper-slide-active .slide-header").addClass(headerClass);
+                    $("#GrandSlider .swiper-slide-active .slide-body").addClass(bodyClass);
+                    $("#GrandSlider .swiper-slide-active .slide-footer").addClass(footerClass);
+                    $("#GrandSlider .swiper-scrollbar-drag").addClass('progressAnimation');
+                });
+                mySwiper.on('slideChange', function () {
+                    var headerClass = $('#GrandSlider .swiper-slide-active .slide-header').data('header'),
+                        bodyClass = $('#GrandSlider .swiper-slide-active .slide-body').data('body'),
+                        footerClass = $('#GrandSlider .swiper-slide-active .slide-footer').data('footer');
+                    $("#GrandSlider .swiper-slide-active .slide-caption").removeClass('d-flex');
+                    $("#GrandSlider .swiper-slide-active .slide-header").removeClass(headerClass);
+                    $("#GrandSlider .swiper-slide-active .slide-body").removeClass(bodyClass);
+                    $("#GrandSlider .swiper-slide-active .slide-footer").removeClass(footerClass);
+                    $("#GrandSlider .swiper-scrollbar-drag").removeClass('progressAnimation');
+                });
+            });
+        </script>
+    </div>
+    <!-- If we need pagination -->
+    @if (settings.showPagination)
+    {
+        <div class="GrandSlider-pagination swiper-pagination"></div>
+    }
+
+    <!-- If we need navigation buttons -->
+    @if (settings.showNavigation)
+    {
+        <div class="GrandSlider-next"><span>&#9654;</span></div>
+        <div class="GrandSlider-prev"><span>&#9664;</span></div>
+    }
+
+    @if (settings.usecountdown)
+    {
+        <div class="swiper-scrollbar @settings.countdown"></div>
+    }
+
+</div>

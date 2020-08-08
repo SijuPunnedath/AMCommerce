@@ -1,0 +1,601 @@
+{
+  "format": 1,
+  "restore": {
+    "G:\\Amicus\\AmicusAPI\\AmicusAPI.csproj": {}
+  },
+  "projects": {
+    "G:\\Amicus\\AmicusAPI\\AmicusAPI.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "G:\\Amicus\\AmicusAPI\\AmicusAPI.csproj",
+        "projectName": "AmicusAPI",
+        "projectPath": "G:\\Amicus\\AmicusAPI\\AmicusAPI.csproj",
+        "packagesPath": "C:\\Users\\siju.p\\.nuget\\packages\\",
+        "outputPath": "G:\\Amicus\\AmicusAPI\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "G:\\Amicus\\GrandNode4.70_Source\\NuGet.Config",
+          "C:\\Users\\siju.p\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 19.2.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "e:\\Program Files (x86)\\DevExpress 19.2\\Components\\System\\Components\\Packages": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://nuget.telerik.com/nuget": {},
+          "https://www.myget.org/F/webapinetcore/api/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {
+              "G:\\Amicus\\GrandNode4.70_Source\\Grand.Api\\Grand.Api.csproj": {
+                "projectPath": "G:\\Amicus\\GrandNode4.70_Source\\Grand.Api\\Grand.Api.csproj"
+              },
+              "G:\\Amicus\\GrandNode4.70_Source\\Grand.Core\\Grand.Core.csproj": {
+                "projectPath": "G:\\Amicus\\GrandNode4.70_Source\\Grand.Core\\Grand.Core.csproj"
+              },
+              "G:\\Amicus\\GrandNode4.70_Source\\Grand.Framework\\Grand.Framework.csproj": {
+                "projectPath": "G:\\Amicus\\GrandNode4.70_Source\\Grand.Framework\\Grand.Framework.csproj"
+              },
+              "G:\\Amicus\\GrandNode4.70_Source\\Grand.Services\\Grand.Services.csproj": {
+                "projectPath": "G:\\Amicus\\GrandNode4.70_Source\\Grand.Services\\Grand.Services.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "FluentValidation.ValidatorAttribute": {
+              "target": "Package",
+              "version": "[8.6.1, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[5.5.1, )"
+            },
+            "Swashbuckle.AspNetCore.Swagger": {
+              "target": "Package",
+              "version": "[5.5.1, )"
+            },
+            "Swashbuckle.AspNetCore.SwaggerGen": {
+              "target": "Package",
+              "version": "[5.5.1, )"
+            },
+            "Swashbuckle.Core": {
+              "target": "Package",
+              "version": "[5.6.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "G:\\Amicus\\GrandNode4.70_Source\\Grand.Api\\Grand.Api.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "G:\\Amicus\\GrandNode4.70_Source\\Grand.Api\\Grand.Api.csproj",
+        "projectName": "Grand.Api",
+        "projectPath": "G:\\Amicus\\GrandNode4.70_Source\\Grand.Api\\Grand.Api.csproj",
+        "packagesPath": "C:\\Users\\siju.p\\.nuget\\packages\\",
+        "outputPath": "G:\\Amicus\\GrandNode4.70_Source\\Grand.Api\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "G:\\Amicus\\GrandNode4.70_Source\\NuGet.Config",
+          "C:\\Users\\siju.p\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 19.2.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "e:\\Program Files (x86)\\DevExpress 19.2\\Components\\System\\Components\\Packages": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://nuget.telerik.com/nuget": {},
+          "https://www.myget.org/F/webapinetcore/api/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {
+              "G:\\Amicus\\GrandNode4.70_Source\\Grand.Core\\Grand.Core.csproj": {
+                "projectPath": "G:\\Amicus\\GrandNode4.70_Source\\Grand.Core\\Grand.Core.csproj"
+              },
+              "G:\\Amicus\\GrandNode4.70_Source\\Grand.Framework\\Grand.Framework.csproj": {
+                "projectPath": "G:\\Amicus\\GrandNode4.70_Source\\Grand.Framework\\Grand.Framework.csproj"
+              },
+              "G:\\Amicus\\GrandNode4.70_Source\\Grand.Services\\Grand.Services.csproj": {
+                "projectPath": "G:\\Amicus\\GrandNode4.70_Source\\Grand.Services\\Grand.Services.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "Microsoft.AspNetCore.OData": {
+              "target": "Package",
+              "version": "[7.4.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "G:\\Amicus\\GrandNode4.70_Source\\Grand.Core\\Grand.Core.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "G:\\Amicus\\GrandNode4.70_Source\\Grand.Core\\Grand.Core.csproj",
+        "projectName": "Grand.Core",
+        "projectPath": "G:\\Amicus\\GrandNode4.70_Source\\Grand.Core\\Grand.Core.csproj",
+        "packagesPath": "C:\\Users\\siju.p\\.nuget\\packages\\",
+        "outputPath": "G:\\Amicus\\GrandNode4.70_Source\\Grand.Core\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "G:\\Amicus\\GrandNode4.70_Source\\NuGet.Config",
+          "C:\\Users\\siju.p\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 19.2.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "e:\\Program Files (x86)\\DevExpress 19.2\\Components\\System\\Components\\Packages": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://nuget.telerik.com/nuget": {},
+          "https://www.myget.org/F/webapinetcore/api/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "Autofac": {
+              "target": "Package",
+              "version": "[5.2.0, )"
+            },
+            "Autofac.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "DotLiquid": {
+              "target": "Package",
+              "version": "[2.0.333, )"
+            },
+            "GoogleAuthenticator": {
+              "target": "Package",
+              "version": "[2.0.1, )"
+            },
+            "MediatR": {
+              "target": "Package",
+              "version": "[8.0.1, )"
+            },
+            "MediatR.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[3.1.4, )"
+            },
+            "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
+              "target": "Package",
+              "version": "[3.1.4, )"
+            },
+            "Microsoft.CodeAnalysis.CSharp": {
+              "target": "Package",
+              "version": "[3.5.0, )"
+            },
+            "Microsoft.CodeAnalysis.CSharp.Scripting": {
+              "target": "Package",
+              "version": "[3.5.0, )"
+            },
+            "Microsoft.Extensions.Caching.Memory": {
+              "target": "Package",
+              "version": "[3.1.4, )"
+            },
+            "Microsoft.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[3.1.4, )"
+            },
+            "Microsoft.Extensions.DependencyModel": {
+              "target": "Package",
+              "version": "[3.1.4, )"
+            },
+            "MongoDB.Bson": {
+              "target": "Package",
+              "version": "[2.10.4, )"
+            },
+            "MongoDB.Driver": {
+              "target": "Package",
+              "version": "[2.10.4, )"
+            },
+            "MongoDB.Driver.Core": {
+              "target": "Package",
+              "version": "[2.10.4, )"
+            },
+            "MongoDB.Driver.GridFS": {
+              "target": "Package",
+              "version": "[2.10.4, )"
+            },
+            "StackExchange.Redis": {
+              "target": "Package",
+              "version": "[2.1.30, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "G:\\Amicus\\GrandNode4.70_Source\\Grand.Framework\\Grand.Framework.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "G:\\Amicus\\GrandNode4.70_Source\\Grand.Framework\\Grand.Framework.csproj",
+        "projectName": "Grand.Framework",
+        "projectPath": "G:\\Amicus\\GrandNode4.70_Source\\Grand.Framework\\Grand.Framework.csproj",
+        "packagesPath": "C:\\Users\\siju.p\\.nuget\\packages\\",
+        "outputPath": "G:\\Amicus\\GrandNode4.70_Source\\Grand.Framework\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "G:\\Amicus\\GrandNode4.70_Source\\NuGet.Config",
+          "C:\\Users\\siju.p\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 19.2.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "e:\\Program Files (x86)\\DevExpress 19.2\\Components\\System\\Components\\Packages": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://nuget.telerik.com/nuget": {},
+          "https://www.myget.org/F/webapinetcore/api/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {
+              "G:\\Amicus\\GrandNode4.70_Source\\Grand.Core\\Grand.Core.csproj": {
+                "projectPath": "G:\\Amicus\\GrandNode4.70_Source\\Grand.Core\\Grand.Core.csproj"
+              },
+              "G:\\Amicus\\GrandNode4.70_Source\\Grand.Services\\Grand.Services.csproj": {
+                "projectPath": "G:\\Amicus\\GrandNode4.70_Source\\Grand.Services\\Grand.Services.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "AspNetCore.HealthChecks.MongoDb": {
+              "target": "Package",
+              "version": "[3.1.1, )"
+            },
+            "BundlerMinifier.Core": {
+              "target": "Package",
+              "version": "[3.2.447, )"
+            },
+            "FluentValidation": {
+              "target": "Package",
+              "version": "[8.6.2, )"
+            },
+            "FluentValidation.AspNetCore": {
+              "target": "Package",
+              "version": "[8.6.2, )"
+            },
+            "FluentValidation.ValidatorAttribute": {
+              "target": "Package",
+              "version": "[8.6.1, )"
+            },
+            "Microsoft.AspNetCore.DataProtection.StackExchangeRedis": {
+              "target": "Package",
+              "version": "[3.1.4, )"
+            },
+            "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation": {
+              "target": "Package",
+              "version": "[3.1.4, )"
+            },
+            "MiniProfiler.AspNetCore.Mvc": {
+              "target": "Package",
+              "version": "[4.1.0, )"
+            },
+            "NetEscapades.AspNetCore.SecurityHeaders": {
+              "target": "Package",
+              "version": "[0.11.0, )"
+            },
+            "System.IO.FileSystem.AccessControl": {
+              "target": "Package",
+              "version": "[4.7.0, )"
+            },
+            "Wangkanai.Detection.Crawler": {
+              "target": "Package",
+              "version": "[2.0.0, )"
+            },
+            "Wangkanai.Detection.Device": {
+              "target": "Package",
+              "version": "[2.0.0, )"
+            },
+            "WebEssentials.AspNetCore.PWA": {
+              "target": "Package",
+              "version": "[1.0.59, )"
+            },
+            "WebMarkupMin.AspNetCore3": {
+              "target": "Package",
+              "version": "[2.8.2, )"
+            },
+            "WebMarkupMin.Core": {
+              "target": "Package",
+              "version": "[2.8.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "G:\\Amicus\\GrandNode4.70_Source\\Grand.Services\\Grand.Services.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "G:\\Amicus\\GrandNode4.70_Source\\Grand.Services\\Grand.Services.csproj",
+        "projectName": "Grand.Services",
+        "projectPath": "G:\\Amicus\\GrandNode4.70_Source\\Grand.Services\\Grand.Services.csproj",
+        "packagesPath": "C:\\Users\\siju.p\\.nuget\\packages\\",
+        "outputPath": "G:\\Amicus\\GrandNode4.70_Source\\Grand.Services\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "G:\\Amicus\\GrandNode4.70_Source\\NuGet.Config",
+          "C:\\Users\\siju.p\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 19.2.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "e:\\Program Files (x86)\\DevExpress 19.2\\Components\\System\\Components\\Packages": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://nuget.telerik.com/nuget": {},
+          "https://www.myget.org/F/webapinetcore/api/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {
+              "G:\\Amicus\\GrandNode4.70_Source\\Grand.Core\\Grand.Core.csproj": {
+                "projectPath": "G:\\Amicus\\GrandNode4.70_Source\\Grand.Core\\Grand.Core.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "AWSSDK.Core": {
+              "target": "Package",
+              "version": "[3.3.106.23, )"
+            },
+            "AWSSDK.S3": {
+              "target": "Package",
+              "version": "[3.3.110.69, )"
+            },
+            "EPPlus": {
+              "target": "Package",
+              "version": "[4.5.3.2, )"
+            },
+            "Google.Apis": {
+              "target": "Package",
+              "version": "[1.45.0, )"
+            },
+            "Google.Apis.AnalyticsReporting.v4": {
+              "target": "Package",
+              "version": "[1.45.0.1943, )"
+            },
+            "MailKit": {
+              "target": "Package",
+              "version": "[2.6.0, )"
+            },
+            "MaxMind.GeoIP2": {
+              "target": "Package",
+              "version": "[3.2.0, )"
+            },
+            "SkiaSharp": {
+              "target": "Package",
+              "version": "[1.68.2.1, )"
+            },
+            "SkiaSharp.NativeAssets.Linux.NoDependencies": {
+              "target": "Package",
+              "version": "[1.68.2.1, )"
+            },
+            "System.ServiceModel.Duplex": {
+              "target": "Package",
+              "version": "[4.7.0, )"
+            },
+            "System.ServiceModel.Http": {
+              "target": "Package",
+              "version": "[4.7.0, )"
+            },
+            "System.ServiceModel.NetTcp": {
+              "target": "Package",
+              "version": "[4.7.0, )"
+            },
+            "System.ServiceModel.Security": {
+              "target": "Package",
+              "version": "[4.7.0, )"
+            },
+            "WindowsAzure.Storage": {
+              "target": "Package",
+              "version": "[9.3.3, )"
+            },
+            "iTextSharp.LGPLv2.Core": {
+              "target": "Package",
+              "version": "[1.6.7, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

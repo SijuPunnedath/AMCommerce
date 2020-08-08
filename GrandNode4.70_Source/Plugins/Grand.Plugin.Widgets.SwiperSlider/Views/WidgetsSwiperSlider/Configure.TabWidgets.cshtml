@@ -1,0 +1,55 @@
+﻿@model Grand.Plugin.Widgets.SwiperSlider.Models.ConfigurationModel
+
+<div class="form-horizontal">
+    <div class="form-body">
+        <div class="form-group">
+            @*<nop-override-store-checkbox asp-for="WidgetZone_OverrideForStore" asp-input="WidgetZone" asp-store-scope="@Model.ActiveStoreScopeConfiguration" />*@
+            <admin-label asp-for="WidgetZone" />
+            <div class="col-md-9 col-sm-9">
+                <admin-select asp-for="WidgetZone" asp-items="Model.WidgetZones" />
+                <span asp-validation-for="WidgetZone"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            @*<nop-override-store-checkbox asp-for="CateroryWidgetZone_OverrideForStore" asp-input="CateroryWidgetZone" asp-store-scope="@Model.ActiveStoreScopeConfiguration" />*@
+            <admin-label asp-for="CateroryWidgetZone" />
+            <div class="col-md-9 col-sm-9">
+                <admin-select asp-for="CateroryWidgetZone" asp-items="Model.CateroryWidgetZones" />
+                <span asp-validation-for="CateroryWidgetZone"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            @*<nop-override-store-checkbox asp-for="ManufacturerWidgetZone_OverrideForStore" asp-input="ManufacturerWidgetZone" asp-store-scope="@Model.ActiveStoreScopeConfiguration" />*@
+            <admin-label asp-for="ManufacturerWidgetZone" />
+            <div class="col-md-9 col-sm-9">
+                <admin-select asp-for="ManufacturerWidgetZone" asp-items="Model.ManufacturerWidgetZones" />
+                <span asp-validation-for="ManufacturerWidgetZone"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @*<nop-override-store-checkbox asp-for="widgetZoneOwn_OverrideForStore" asp-input="widgetZoneOwn" asp-store-scope="@Model.ActiveStoreScopeConfiguration" />*@
+            <admin-label asp-for="widgetZoneOwn" />
+            <div class="col-md-9 col-sm-9">
+                <admin-input asp-for="widgetZoneOwn" />
+                <span asp-validation-for="widgetZoneOwn"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            @*<nop-override-store-checkbox asp-for="categoryWidgetZoneOwn_OverrideForStore" asp-input="categoryWidgetZoneOwn" asp-store-scope="@Model.ActiveStoreScopeConfiguration" />*@
+            <admin-label asp-for="categoryWidgetZoneOwn" />
+            <div class="col-md-9 col-sm-9">
+                <admin-input asp-for="categoryWidgetZoneOwn" />
+                <span asp-validation-for="categoryWidgetZoneOwn"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            @*<nop-override-store-checkbox asp-for="ManufacturerWidgetZoneOwn_OverrideForStore" asp-input="ManufacturerWidgetZoneOwn" asp-store-scope="@Model.ActiveStoreScopeConfiguration" />*@
+            <admin-label asp-for="ManufacturerWidgetZoneOwn" />
+            <div class="col-md-9 col-sm-9">
+                <admin-input asp-for="ManufacturerWidgetZoneOwn" />
+                <span asp-validation-for="ManufacturerWidgetZoneOwn"></span>
+            </div>
+        </div>
+    </div>
+</div>

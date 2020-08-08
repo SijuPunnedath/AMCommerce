@@ -1,0 +1,21 @@
+﻿@model Grand.Plugin.Widgets.SwiperSlider.Models.SlideConfigurationModel
+
+<div class="form-horizontal">
+    <div class="form-body">
+        <div class="form-group">
+            <admin-label asp-for="PictureTitle" />
+            <div class="col-md-9 col-sm-9">
+                <admin-input asp-for="PictureTitle" />
+                <span asp-validation-for="PictureTitle"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <admin-label asp-for="PictureAlt" />
+            <div class="col-md-9 col-sm-9">
+                <admin-input asp-for="PictureAlt" />
+                <span asp-validation-for="PictureAlt"></span>
+            </div>
+        </div>
+    </div>
+</div>

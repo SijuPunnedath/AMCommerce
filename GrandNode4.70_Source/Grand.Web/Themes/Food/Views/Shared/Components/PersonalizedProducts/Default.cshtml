@@ -1,0 +1,24 @@
+﻿@model IList<ProductOverviewModel>
+@inject DisplayOrderHomePage order
+    <div class="product-grid">
+        <div class="swiper-container homepage-products-slider lazyload">
+            <div class="custom-loader-container">
+                <div class="loader-5"><span></span></div>
+            </div>
+            <div class="swiper-wrapper">
+                @foreach (var item in Model)
+                {
+                    <div class="swiper-slide product-container">
+                        <partial name="_ProductBox" model="item" />
+                    </div>
+                }
+            </div>
+            <div class="swiper-custom-prev">
+                <span></span>
+            </div>
+            <div class="swiper-custom-next">
+                <span></span>
+            </div>
+        </div>
+        <div class="swiper-pagination custom-pagination"></div>
+    </div>

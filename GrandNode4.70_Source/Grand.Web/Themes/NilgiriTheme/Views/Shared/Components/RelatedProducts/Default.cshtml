@@ -1,0 +1,35 @@
+﻿@model IList<ProductOverviewModel>
+@if (Model.Any())
+{
+    @*<div class="col-12 customGrid related-products-grid text-center product-grid px-0">
+        <h2 class="h3 generalTitle text-center">@T("Products.RelatedProducts")</h2>
+        <div class="flex-grid form-row">
+            @foreach (var item in Model)
+            {
+                <div class="col-xxl-2 col-lg-3 col-sm-6 col-6 product-container mb-2">
+                    <partial name="_ProductBox" model="item" />
+                </div>
+            }
+        </div>
+    </div>*@
+    <div class="col-xxl-2 col-lg-3 col-md-12 px-lg-3 px-0" id="related_container">
+        <div class="recommended-product">
+            <div class="custom-header">
+                <h5>@T("Products.RelatedProducts")</h5>
+            </div>
+            <div id="RelatedProducts" class="swiper-container lazyload">
+                <div class="custom-loader-container">
+                    <div class="loader-5"><span></span></div>
+                </div>
+                <div class="swiper-wrapper">
+                    @foreach (var item in Model)
+                    {
+                        <div class="swiper-slide">
+                            <partial name="_ProductBoxRelated" model="item" />
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,89 @@
+﻿<header role="presentation">
+    @await Component.InvokeAsync("Widget", new { widgetZone = "header" })
+    <div class="headerTopic">
+        <div class="container-fluid">
+            @await Component.InvokeAsync("TopicBlock", new { systemName = "HeaderTopic" })
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row px-lg-0 px-3">
+            <div class="HeadTop">
+                <a class="js-offcanvas-trigger mobile-menu-trigger d-lg-none d-flex justify-content-center align-content-center mr-3" data-offcanvas-trigger="mobile_menu" href="#mobile_menu">
+                    <span class="menu-icon">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </span>
+                </a>
+                <div class="col-xxl-2 col-lg-3 d-lg-block d-inline-flex px-lg-3 px-0 mx-lg-0 mx-auto">
+                    <div class="header-logo mx-lg-0 mx-auto">
+                        @await Component.InvokeAsync("Logo")
+                    </div>
+                </div>
+                <div class="col pl-0 solo-link-container d-lg-block d-none">
+                    <ul></ul>
+                </div>
+                <div class="col-xxl-2 col-lg-3 pr-0 selectors-desktop d-lg-inline-flex justify-content-end d-none">
+                    <div class="selectors-container d-inline-flex align-items-center">
+                        @await Component.InvokeAsync("TaxTypeSelector")
+                        @await Component.InvokeAsync("CurrencySelector")
+                        @await Component.InvokeAsync("LanguageSelector")
+                        @await Component.InvokeAsync("StoreSelector")
+                    </div>
+                </div>
+            </div>
+            <div class="HeadBottom">
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-xxl-2 col-lg-3 d-lg-block d-none">
+                            <div class="mainNav-button">
+                                <span class="menu-icon">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </span>
+                                @*<span class="title">@T("Menu.categories")</span>*@
+                                <span class="title">@T("Categories")</span>
+                            </div>
+                        </div>
+                        <div class="col-xl col-lg">
+                            <div class="formSearch">
+                                @await Component.InvokeAsync("SearchBox")
+                            </div>
+                        </div>
+                        <div class="col-xxl-2 col-lg-3 hl-desktop d-lg-block d-none">
+                            <div class="HeaderLinks">
+                                <a class="js-offcanvas-trigger user-panel-trigger d-flex justify-content-center align-content-center ml-lg-3 ml-2" data-offcanvas-trigger="user_panel" href="#user_panel">
+                                    <span class="lni lni-user"></span>
+                                    <span class="title" data-title-login="@T("Account.MyAccount")" data-title-logout="@T("Account.Login")"></span>
+                                </a>
+                                @await Component.InvokeAsync("ShoppingCartLinks")
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <nav class="navbar mainNav navbar-expand-sm offcanvas-desktop show">
+                    <div class="navbar-collapse">
+                        <ul class="navbar-nav">
+                            <li class="nav-item dropdown demo_variants d-lg-flex d-none">
+                                @*<a class="nav-link dropdown-toggle">
+                                    <span><strong>Product Variants</strong></span>
+                                    <span class="lni lni-chevron-right arrow-right"></span>
+                                </a>*@
+                                @await Component.InvokeAsync("TopicBlock", new { systemName = "MenuProducts" })
+                            </li>
+                            <li class="nav-item dropdown demo_variants d-lg-flex d-none">
+                                @*<a class="nav-link dropdown-toggle">
+                                    <span><strong>Category Variants</strong></span>
+                                    <span class="lni lni-chevron-right arrow-right"></span>
+                                </a>*@
+                                @await Component.InvokeAsync("TopicBlock", new { systemName = "MenuCategories" })
+                            </li>
+                            @await Component.InvokeAsync("TopMenu")
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>

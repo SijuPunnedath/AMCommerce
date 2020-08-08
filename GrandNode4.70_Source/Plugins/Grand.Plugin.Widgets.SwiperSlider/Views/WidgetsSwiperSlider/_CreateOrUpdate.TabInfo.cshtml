@@ -1,0 +1,89 @@
+﻿@model Grand.Plugin.Widgets.SwiperSlider.Models.SlideConfigurationModel
+
+<div class="form-horizontal">
+    <div class="form-body">
+        <div class="form-group">
+            <admin-label asp-for="Publish" />
+            <div class="col-md-9 col-sm-9">
+                <admin-input asp-for="Publish" />
+                <span asp-validation-for="Publish"></span>
+            </div>
+        </div>
+
+        @await (Html.LocalizedEditor<Grand.Plugin.Widgets.SwiperSlider.Models.SlideConfigurationModel, Grand.Plugin.Widgets.SwiperSlider.Models.SlideLocalizedModel>("slide-localized",
+                            @<div>
+                                <div class="form-group">
+                                    <admin-label asp-for="Locales[item].Header" />
+                                    <div class="col-md-9 col-sm-9">
+                                        <admin-input asp-for="Locales[item].Header" asp-template="RichEditor" />
+                                        <span asp-validation-for="Locales[item].Header"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <admin-label asp-for="Locales[item].Body" />
+                                    <div class="col-md-9 col-sm-9">
+                                        <admin-input asp-for="Locales[item].Body" asp-template="RichEditor" />
+                                        <span asp-validation-for="Locales[item].Body"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <admin-label asp-for="Locales[item].Footer" />
+                                    <div class="col-md-9 col-sm-9">
+                                        <admin-input asp-for="Locales[item].Footer" asp-template="RichEditor" />
+                                        <span asp-validation-for="Locales[item].Footer"></span>
+                                    </div>
+                                </div>
+                                <input asp-for="Locales[item].LanguageId" type="hidden" />
+                            </div>
+                                            ,
+                                            @<div>
+                                                <div class="form-group">
+                                                    <admin-label asp-for="Header" />
+                                                    <div class="col-md-9 col-sm-9">
+                                                        <admin-input asp-for="Header" asp-template="RichEditor" />
+                                                        <span asp-validation-for="Header"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <admin-label asp-for="Body" />
+                                                    <div class="col-md-9 col-sm-9">
+                                                        <admin-input asp-for="Body" asp-template="RichEditor" />
+                                                        <span asp-validation-for="Body"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <admin-label asp-for="Footer" />
+                                                    <div class="col-md-9 col-sm-9">
+                                                        <admin-input asp-for="Footer" asp-template="RichEditor" />
+                                                        <span asp-validation-for="Footer"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                                        ))
+        <div>
+            <div class="form-group">
+                <admin-label asp-for="PictureId" />
+                <div class="col-md-9 col-sm-9">
+                    <admin-input asp-for="PictureId" />
+                    <span asp-validation-for="PictureId"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <admin-label asp-for="SlideOrder" />
+                <div class="col-md-9 col-sm-9">
+                    <admin-input asp-for="SlideOrder" />
+                    <span asp-validation-for="SlideOrder"></span>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <admin-label asp-for="Caption" />
+                <div class="col-md-9 col-sm-9">
+                    <admin-select asp-for="Caption" asp-items="Model.CaptionTypes" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

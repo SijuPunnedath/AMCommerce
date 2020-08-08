@@ -1,0 +1,148 @@
+﻿@model Grand.Plugin.Widgets.SwiperSlider.Models.ConfigurationModel
+
+<div class="form-horizontal">
+    <div class="form-body">
+        <div class="form-group">
+            <div class="row">
+                @*<nop-override-store-checkbox asp-for="breakpoints_OverrideForStore" asp-input="breakpoints" asp-store-scope="@Model.ActiveStoreScopeConfiguration" />*@
+                <admin-label asp-for="breakpoints" />
+                <div class="col-md-9 col-sm-9">
+                    <admin-input asp-for="breakpoints" />
+                    <span asp-validation-for="breakpoints"></span>
+                </div>
+            </div>
+
+            <div class="breakpoints-settings">
+
+                <div class="col-md-4">
+                    <div class="panel-group">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">@T("grand.widget.swiperslider.breakpoints.small")</div>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    @*<nop-override-store-checkbox asp-for="slidesPerViewSmall_OverrideForStore" asp-input="slidesPerViewSmall" asp-store-scope="@Model.ActiveStoreScopeConfiguration" />*@
+                                    <admin-label asp-for="slidesPerViewSmall" />
+                                    <div class="col-md-9 col-sm-9">
+                                        <admin-input asp-for="slidesPerViewSmall" />
+                                        <span asp-validation-for="slidesPerViewSmall"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <admin-label asp-for="spaceBetweenSmall" />
+                                    <div class="col-md-9 col-sm-9">
+                                        <admin-input asp-for="spaceBetweenSmall" asp-postfix="px" />
+                                        <span asp-validation-for="spaceBetweenSmall"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <admin-label asp-for="turnOffSmall" />
+                                    <div class="col-md-9 col-sm-9">
+                                        <admin-input asp-for="turnOffSmall" />
+                                        <span asp-validation-for="turnOffSmall"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="panel-group">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">@T("grand.widget.swiperslider.breakpoints.medium")</div>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    @*<nop-override-store-checkbox asp-for="slidesPerViewMedium_OverrideForStore" asp-input="slidesPerViewMedium" asp-store-scope="@Model.ActiveStoreScopeConfiguration" />*@
+                                    <admin-label asp-for="slidesPerViewMedium" />
+                                    <div class="col-md-9 col-sm-9">
+                                        <admin-input asp-for="slidesPerViewMedium" />
+                                        <span asp-validation-for="slidesPerViewMedium"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <admin-label asp-for="spaceBetweenMedium" />
+                                    <div class="col-md-9 col-sm-9">
+                                        <admin-input asp-for="spaceBetweenMedium" asp-postfix="px" />
+                                        <span asp-validation-for="spaceBetweenMedium"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <admin-label asp-for="turnOffMedium" />
+                                    <div class="col-md-9 col-sm-9">
+                                        <admin-input asp-for="turnOffMedium" />
+                                        <span asp-validation-for="turnOffMedium"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="panel-group">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">@T("grand.widget.swiperslider.breakpoints.large")</div>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    @*<nop-override-store-checkbox asp-for="slidesPerViewLarge_OverrideForStore" asp-input="slidesPerViewLarge" asp-store-scope="@Model.ActiveStoreScopeConfiguration" />*@
+                                    <admin-label asp-for="slidesPerViewLarge" />
+                                    <div class="col-md-9 col-sm-9">
+                                        <admin-input asp-for="slidesPerViewLarge" />
+                                        <span asp-validation-for="slidesPerViewLarge"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <admin-label asp-for="spaceBetweenLarge" />
+                                    <div class="col-md-9 col-sm-9">
+                                        <admin-input asp-for="spaceBetweenLarge" asp-postfix="px" />
+                                        <span asp-validation-for="spaceBetweenLarge"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <admin-label asp-for="turnOffLarge" />
+                                    <div class="col-md-9 col-sm-9">
+                                        <admin-input asp-for="turnOffLarge" />
+                                        <span asp-validation-for="turnOffLarge"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="panel-group">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">@T("grand.widget.swiperslider.breakpoints.extralarge")</div>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    @*<nop-override-store-checkbox asp-for="slidesPerViewExtraLarge_OverrideForStore" asp-input="slidesPerViewExtraLarge" asp-store-scope="@Model.ActiveStoreScopeConfiguration" />*@
+                                    <admin-label asp-for="slidesPerViewExtraLarge" />
+                                    <div class="col-md-9 col-sm-9">
+                                        <admin-input asp-for="slidesPerViewExtraLarge" />
+                                        <span asp-validation-for="slidesPerViewExtraLarge"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <admin-label asp-for="spaceBetweenExtraLarge" />
+                                    <div class="col-md-9 col-sm-9">
+                                        <admin-input asp-for="spaceBetweenExtraLarge" asp-postfix="px" />
+                                        <span asp-validation-for="spaceBetweenExtraLarge"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <admin-label asp-for="turnOffExtraLarge" />
+                                    <div class="col-md-9 col-sm-9">
+                                        <admin-input asp-for="turnOffExtraLarge" />
+                                        <span asp-validation-for="turnOffExtraLarge"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
